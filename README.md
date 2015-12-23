@@ -15,9 +15,18 @@ gem 'simctl'
 
 ## Usage
 
-### create
+### boot_device
 
-#### create_device
+```ruby
+device = SimCtl.device(name: 'my iphone 5', state: 'Shutdown')
+SimCtl.boot_device(device)
+
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Shutdown').boot!
+```
+
+### create_device
 
 ```ruby
 SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
@@ -25,35 +34,18 @@ SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.
 #<SimCtl::Device:0x007fbce48afd88 @state="Creating", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
 ```
 
-### delete
-
-#### delete_device
+### delete_device
 
 ```ruby
 device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
-SimCtl.delete_device!(device)
+SimCtl.delete_device(device)
 
 # or:
 
 SimCtl.device(name: 'my iphone 5', state: 'Booted').delete!
 ```
 
-### erase
-
-#### erase_device
-
-```ruby
-device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
-SimCtl.erase_device!(device)
-
-# or:
-
-SimCtl.device(name: 'my iphone 5', state: 'Booted').erase!
-```
-
-### find
-
-#### devicetype
+### devicetype
 
 ```ruby
 SimCtl.devicetype(name: 'iPhone 5')
@@ -61,7 +53,7 @@ SimCtl.devicetype(name: 'iPhone 5')
 #<SimCtl::DeviceType:0x007fd90dd9f2e0 @name="iPhone 5", @identifier="com.apple.CoreSimulator.SimDeviceType.iPhone-5">
 ```
 
-#### device
+### device
 
 ```ruby
 SimCtl.device(name: 'my iphone 5', state: 'Booted')
@@ -69,17 +61,18 @@ SimCtl.device(name: 'my iphone 5', state: 'Booted')
 #<SimCtl::Device:0x007fd90dcce910 @state="Booted", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
 ```
 
-#### runtime
+### erase_device
 
 ```ruby
-SimCtl.runtime(name: 'iOS 9.2')
+device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
+SimCtl.erase_device(device)
 
-#<SimCtl::Runtime:0x007fd90dd2da28 @buildversion="13C75", @availability="(available)", @name="iOS 9.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-2", @version="9.2">
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Booted').erase!
 ```
 
-### list
-
-#### list_devices
+### list_devices
 
 ```ruby
 SimCtl.list_devices.each do |device|
@@ -90,7 +83,7 @@ end
 #<SimCtl::Device:0x007fd90dd06e00 @state="Shutdown", @availability="(available)", @name="iPhone 5", @udid="CEFEDED6-94C0-4B6B-8ABC-B855C49F06B0", @os="iOS 9.2">
 ```
 
-#### list_devicetypes
+### list_devicetypes
 
 ```ruby
 SimCtl.list_devicetypes.each do |devicetype|
@@ -114,7 +107,7 @@ end
 #<SimCtl::DeviceType:0x007fbce48f4be0 @name="Apple Watch - 42mm", @identifier="com.apple.CoreSimulator.SimDeviceType.Apple-Watch-42mm">
 ```
 
-#### list_runtimes
+### list_runtimes
 
 ```ruby
 SimCtl.list_runtimes.each do |runtime|
@@ -129,4 +122,23 @@ end
 #<SimCtl::Runtime:0x007fbce48cd220 @buildversion="13C75", @availability="(available)", @name="iOS 9.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-2", @version="9.2">
 #<SimCtl::Runtime:0x007fbce48cd130 @buildversion="13U78", @availability="(available)", @name="tvOS 9.1", @identifier="com.apple.CoreSimulator.SimRuntime.tvOS-9-1", @version="9.1">
 #<SimCtl::Runtime:0x007fbce48cd040 @buildversion="13S660", @availability="(available)", @name="watchOS 2.1", @identifier="com.apple.CoreSimulator.SimRuntime.watchOS-2-1", @version="2.1">
+```
+
+### runtime
+
+```ruby
+SimCtl.runtime(name: 'iOS 9.2')
+
+#<SimCtl::Runtime:0x007fd90dd2da28 @buildversion="13C75", @availability="(available)", @name="iOS 9.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-2", @version="9.2">
+```
+
+### shutdown_device
+
+```ruby
+device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
+SimCtl.shutdown_device(device)
+
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Booted').shutdown!
 ```

@@ -7,17 +7,21 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
     @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
     @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    Timeout::timeout(15) do
-      loop do
-        device = SimCtl.device(udid: @device.udid)
-        break if device && device.state != 'Creating'
-      end
-    end
+    wait_for {|device| device.state != 'Creating'}
   end
 
   def teardown
     device = SimCtl.device(udid: @device.udid)
     SimCtl.delete_device device if device
+  end
+
+  def wait_for
+    Timeout::timeout(30) do
+      loop do
+        device = SimCtl.device(udid: @device.udid)
+        break if yield device
+      end
+    end
   end
 
   should 'find the device created in setup' do
@@ -33,6 +37,14 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   should 'erase the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
     SimCtl.erase_device device
+  end
+
+  should 'boot/shutdown the device created in setup' do
+    device = SimCtl.device(udid: @device.udid)
+    SimCtl.boot_device device
+    wait_for {|device| device.state == 'Booted'}
+    SimCtl.shutdown_device device
+    wait_for {|device| device.state == 'Shutdown'}
   end
 
   should 'delete the device created in setup' do
