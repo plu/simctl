@@ -15,26 +15,66 @@ gem 'simctl'
 
 ## Usage
 
-### list_runtimes
+### create
+
+#### create_device
 
 ```ruby
-SimCtl.list_runtimes.each do |runtime|
-  puts runtime.inspect
+SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
+```
+
+```
+#<SimCtl::Device:0x007fbce48afd88 @state="Creating", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
+```
+
+### find
+
+#### devicetype
+
+```ruby
+SimCtl.devicetype(name: 'iPhone 5')
+```
+
+```
+#<SimCtl::DeviceType:0x007fd90dd9f2e0 @name="iPhone 5", @identifier="com.apple.CoreSimulator.SimDeviceType.iPhone-5">
+```
+
+#### device
+
+```ruby
+SimCtl.device(name: 'my iphone 5', state: 'Booted')
+```
+
+```
+#<SimCtl::Device:0x007fd90dcce910 @state="Booted", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
+```
+
+#### runtime
+
+```ruby
+SimCtl.runtime(name: 'iOS 9.2')
+```
+
+```
+#<SimCtl::Runtime:0x007fd90dd2da28 @buildversion="13C75", @availability="(available)", @name="iOS 9.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-2", @version="9.2">
+```
+
+### list
+
+#### list_devices
+
+```ruby
+SimCtl.list_devices.each do |device|
+  puts device.inspect
 end
 ```
 
 ```
-#<SimCtl::Runtime:0x007fbce48cd6d0 @buildversion="12B411", @availability="(available)", @name="iOS 8.1", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-1", @version="8.1">
-#<SimCtl::Runtime:0x007fbce48cd5e0 @buildversion="12D508", @availability="(available)", @name="iOS 8.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-2", @version="8.2">
-#<SimCtl::Runtime:0x007fbce48cd4f0 @buildversion="12F70", @availability="(available)", @name="iOS 8.3", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-3", @version="8.3">
-#<SimCtl::Runtime:0x007fbce48cd400 @buildversion="12H141", @availability="(available)", @name="iOS 8.4", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-4", @version="8.4">
-#<SimCtl::Runtime:0x007fbce48cd310 @buildversion="13A344", @availability="(available)", @name="iOS 9.0", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-0", @version="9.0">
-#<SimCtl::Runtime:0x007fbce48cd220 @buildversion="13C75", @availability="(available)", @name="iOS 9.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-2", @version="9.2">
-#<SimCtl::Runtime:0x007fbce48cd130 @buildversion="13U78", @availability="(available)", @name="tvOS 9.1", @identifier="com.apple.CoreSimulator.SimRuntime.tvOS-9-1", @version="9.1">
-#<SimCtl::Runtime:0x007fbce48cd040 @buildversion="13S660", @availability="(available)", @name="watchOS 2.1", @identifier="com.apple.CoreSimulator.SimRuntime.watchOS-2-1", @version="2.1">
+#<SimCtl::Device:0x007fd90dd06f90 @state="Booted", @availability="(available)", @name="iPhone 5", @udid="25AC234A-EB91-46EF-9BCB-B7405813EF93", @os="iOS 9.2">
+#<SimCtl::Device:0x007fd90dd06e00 @state="Shutdown", @availability="(available)", @name="iPhone 5", @udid="CEFEDED6-94C0-4B6B-8ABC-B855C49F06B0", @os="iOS 9.2">
 ```
 
-### list_devicetypes
+#### list_devicetypes
 
 ```ruby
 SimCtl.list_devicetypes.each do |devicetype|
@@ -60,12 +100,21 @@ end
 #<SimCtl::DeviceType:0x007fbce48f4be0 @name="Apple Watch - 42mm", @identifier="com.apple.CoreSimulator.SimDeviceType.Apple-Watch-42mm">
 ```
 
-### create_device
+#### list_runtimes
 
 ```ruby
-SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
+SimCtl.list_runtimes.each do |runtime|
+  puts runtime.inspect
+end
 ```
 
 ```
-#<SimCtl::Device:0x007fbce48afd88 @state="Creating", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
+#<SimCtl::Runtime:0x007fbce48cd6d0 @buildversion="12B411", @availability="(available)", @name="iOS 8.1", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-1", @version="8.1">
+#<SimCtl::Runtime:0x007fbce48cd5e0 @buildversion="12D508", @availability="(available)", @name="iOS 8.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-2", @version="8.2">
+#<SimCtl::Runtime:0x007fbce48cd4f0 @buildversion="12F70", @availability="(available)", @name="iOS 8.3", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-3", @version="8.3">
+#<SimCtl::Runtime:0x007fbce48cd400 @buildversion="12H141", @availability="(available)", @name="iOS 8.4", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-8-4", @version="8.4">
+#<SimCtl::Runtime:0x007fbce48cd310 @buildversion="13A344", @availability="(available)", @name="iOS 9.0", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-0", @version="9.0">
+#<SimCtl::Runtime:0x007fbce48cd220 @buildversion="13C75", @availability="(available)", @name="iOS 9.2", @identifier="com.apple.CoreSimulator.SimRuntime.iOS-9-2", @version="9.2">
+#<SimCtl::Runtime:0x007fbce48cd130 @buildversion="13U78", @availability="(available)", @name="tvOS 9.1", @identifier="com.apple.CoreSimulator.SimRuntime.tvOS-9-1", @version="9.1">
+#<SimCtl::Runtime:0x007fbce48cd040 @buildversion="13S660", @availability="(available)", @name="watchOS 2.1", @identifier="com.apple.CoreSimulator.SimRuntime.watchOS-2-1", @version="2.1">
 ```
