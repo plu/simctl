@@ -9,19 +9,19 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
     Timeout::timeout(15) do
       loop do
-        device = SimCtl.list_devices.select {|d| d.udid == @device.udid}.first
+        device = SimCtl.device(udid: @device.udid)
         break if device && device.state != 'Creating'
       end
     end
   end
 
   def teardown
-    device = SimCtl.list_devices.select {|d| d.udid == @device.udid}.first
+    device = SimCtl.device(udid: @device.udid)
     SimCtl.delete_device device if device
   end
 
   should 'find the device created in setup' do
-    device = SimCtl.list_devices.select {|d| d.udid == @device.udid}.first
+    device = SimCtl.device(udid: @device.udid)
     assert_kind_of SimCtl::Device, device
     assert device.availability != nil
     assert device.name != nil
@@ -31,13 +31,13 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   end
 
   should 'erase the device created in setup' do
-    device = SimCtl.list_devices.select {|d| d.udid == @device.udid}.first
+    device = SimCtl.device(udid: @device.udid)
     SimCtl.erase_device device
   end
 
   should 'delete the device created in setup' do
-    device = SimCtl.list_devices.select {|d| d.udid == @device.udid}.first
+    device = SimCtl.device(udid: @device.udid)
     SimCtl.delete_device device
-    assert_equal 0, SimCtl.list_devices.select {|d| d.udid == @device.udid}.count
+    assert_nil SimCtl.device(udid: @device.udid)
   end
 end
