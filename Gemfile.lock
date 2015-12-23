@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    simctl (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    maxitest (1.5.4)
+      minitest (>= 5.0.0, < 5.9.0)
+    minitest (5.8.3)
+    rake (10.4.2)
+    shoulda-context (1.2.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  maxitest
+  rake
+  shoulda-context
+  simctl!
