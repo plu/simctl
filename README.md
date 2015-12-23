@@ -66,4 +66,6 @@ end
 SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
 ```
 
-
+```
+#<SimCtl::Device state="Creating", availability="(available)", name="my iphone 5", udid="CEFEDED6-94C0-4B6B-8ABC-B855C49F06B0", os="iOS 9.2">
+```
