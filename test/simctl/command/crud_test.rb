@@ -7,7 +7,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
     @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
     @udid = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    Timeout::timeout(5) do
+    Timeout::timeout(15) do
       loop do
         device = SimCtl.list_devices.select {|d| d.udid == @udid}.first
         break if device && device.state != 'Creating'
