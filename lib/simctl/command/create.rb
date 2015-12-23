@@ -4,7 +4,7 @@ module SimCtl
       COMMAND = %w[xcrun simctl create]
 
       def create_device(name, device_type, runtime)
-        Executor.execute([COMMAND, name, device_type.identifier, runtime.identifier]) do |identifier|
+        Executor.execute([COMMAND, "'#{name}'", device_type.identifier, runtime.identifier]) do |identifier|
           identifier
         end
       end

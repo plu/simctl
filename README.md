@@ -59,3 +59,11 @@ end
 #<SimCtl::DeviceType name="Apple Watch - 38mm", identifier="com.apple.CoreSimulator.SimDeviceType.Apple-Watch-38mm">
 #<SimCtl::DeviceType name="Apple Watch - 42mm", identifier="com.apple.CoreSimulator.SimDeviceType.Apple-Watch-42mm">
 ```
+
+### create_device
+
+```ruby
+SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
+```
+
+
