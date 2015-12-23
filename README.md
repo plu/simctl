@@ -25,6 +25,32 @@ SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.
 #<SimCtl::Device:0x007fbce48afd88 @state="Creating", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
 ```
 
+### delete
+
+#### delete_device
+
+```ruby
+device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
+SimCtl.delete_device!(device)
+
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Booted').delete!
+```
+
+### erase
+
+#### erase_device
+
+```ruby
+device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
+SimCtl.erase_device!(device)
+
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Booted').erase!
+```
+
 ### find
 
 #### devicetype
