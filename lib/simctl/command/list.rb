@@ -5,19 +5,19 @@ module SimCtl
 
       def list_devices
         Executor.execute([COMMAND, 'devices']) do |json|
-          result = json['devices'].map {|os, devices| devices.map {|device| Device.new(device.merge(os: os))}}.flatten
+          SimCtl::List.new json['devices'].map {|os, devices| devices.map {|device| Device.new(device.merge(os: os))}}.flatten
         end
       end
 
       def list_devicetypes
         Executor.execute([COMMAND, 'devicetypes']) do |json|
-          json['devicetypes'].map {|devicetype| DeviceType.new(devicetype)}
+          SimCtl::List.new json['devicetypes'].map {|devicetype| DeviceType.new(devicetype)}
         end
       end
 
       def list_runtimes
         Executor.execute([COMMAND, 'runtimes']) do |json|
-          json['runtimes'].map {|runtime| Runtime.new(runtime)}
+          SimCtl::List.new json['runtimes'].map {|runtime| Runtime.new(runtime)}
         end
       end
     end

@@ -1,6 +1,7 @@
 require 'simctl/command'
 require 'simctl/device'
 require 'simctl/device_type'
+require 'simctl/list'
 require 'simctl/runtime'
 
 module SimCtl
