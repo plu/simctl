@@ -1,9 +1,16 @@
 module SimCtl
   class List < Array
-    def where(hash)
+    # Filters an array of objects by a given hash. The keys of
+    # the hash must be methods implemented by the objects. The
+    # values of the hash are compared to the values the object
+    # returns when calling the methods.
+    #
+    # @param filter [Hash] the filters that should be applied
+    # @return [Array] the filtered array.
+    def where(filter)
       select do |item|
         matches = true
-        hash.each do |key, value|
+        filter.each do |key, value|
           matches &= item.send(key) == value
         end
         matches
