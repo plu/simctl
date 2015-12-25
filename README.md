@@ -1,6 +1,6 @@
 # simctl
 
-[![Build Status](https://travis-ci.org/plu/simctl.svg?branch=master)](https://travis-ci.org/plu/simctl) [![Gem Version](https://badge.fury.io/rb/simctl.svg)](https://badge.fury.io/rb/simctl)
+[![Build Status](https://travis-ci.org/plu/simctl.svg?branch=master)](https://travis-ci.org/plu/simctl) [![Gem Version](https://badge.fury.io/rb/simctl.svg)](https://badge.fury.io/rb/simctl) [![Coverage Status](https://coveralls.io/repos/plu/simctl/badge.svg?branch=master&service=github)](https://coveralls.io/github/plu/simctl?branch=master)
 
 Ruby interface to xcrun simctl.
 
