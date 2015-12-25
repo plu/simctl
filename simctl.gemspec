@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake'
   s.add_development_dependency 'maxitest'
   s.add_development_dependency 'shoulda-context'
+  s.add_development_dependency 'coveralls'
 end
