@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class SimCtl::Command::ListTest < Minitest::Test
+  context 'devicetype' do
+    should 'find device type by name' do
+      assert_kind_of SimCtl::DeviceType, SimCtl.devicetype(name: 'iPhone 5')
+    end
+  end
+
   context 'list_devicetypes' do
     should 'contain some devicetypes' do
       assert SimCtl.list_devicetypes.count > 0
@@ -44,4 +50,11 @@ class SimCtl::Command::ListTest < Minitest::Test
       assert SimCtl.list_runtimes.first.name != nil
     end
   end
+
+  context 'runtime' do
+    should 'find runtime by name' do
+      assert_kind_of SimCtl::Runtime, SimCtl.runtime(name: 'iOS 9.2')
+    end
+  end
+
 end
