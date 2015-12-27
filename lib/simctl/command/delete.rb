@@ -6,6 +6,7 @@ module SimCtl
       # Delete a device
       #
       # @param device [SimCtl::Device] the device to delete
+      # @return [void]
       def delete_device(device)
         Executor.execute([COMMAND, device.udid])
       end

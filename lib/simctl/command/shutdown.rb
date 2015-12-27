@@ -6,6 +6,7 @@ module SimCtl
       # Shutdown a device
       #
       # @param device [SimCtl::Device] the device to shutdown
+      # @return [void]
       def shutdown_device(device)
         Executor.execute([COMMAND, device.udid])
       end

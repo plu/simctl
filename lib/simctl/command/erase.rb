@@ -6,6 +6,7 @@ module SimCtl
       # Erase a device
       #
       # @param device [SimCtl::Device] the device to erase
+      # @return [void]
       def erase_device(device)
         Executor.execute([COMMAND, device.udid])
       end

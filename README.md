@@ -124,6 +124,14 @@ end
 #<SimCtl::Runtime:0x007fbce48cd040 @buildversion="13S660", @availability="(available)", @name="watchOS 2.1", @identifier="com.apple.CoreSimulator.SimRuntime.watchOS-2-1", @version="2.1">
 ```
 
+### reset_device
+
+```ruby
+SimCtl.reset_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
+
+#<SimCtl::Device:0x007fbce48afd88 @state="Creating", @availability="(available)", @name="my iphone 5", @udid="6F7269E0-6375-4B72-8451-F2728BF6DA82", @os="iOS 9.2">
+```
+
 ### runtime
 
 ```ruby
