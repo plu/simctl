@@ -12,7 +12,9 @@ class SimCtl::Command::CRUDTest < Minitest::Test
 
   def teardown
     device = SimCtl.device(udid: @device.udid)
-    SimCtl.delete_device device if device
+    return unless device
+    device.shutdown! if device.state != 'Shutdown'
+    device.delete!
   end
 
   def wait_for
@@ -51,5 +53,13 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     device = SimCtl.device(udid: @device.udid)
     SimCtl.delete_device device
     assert_nil SimCtl.device(udid: @device.udid)
+  end
+
+  should 'reset the device created in setup' do
+    device = SimCtl.reset_device @device.name, @devicetype, @runtime
+    assert_kind_of SimCtl::Device, device
+    assert_nil SimCtl.device(udid: @device.udid)
+    @device = device # teardown cleanup
+    wait_for {|device| device.state != 'Creating'}
   end
 end
