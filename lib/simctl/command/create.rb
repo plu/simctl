@@ -24,7 +24,7 @@ module SimCtl
       # @yield [exception] an exception that might happen during shutdown/delete of the old device
       def reset_device(name, device_type, runtime)
         begin
-          SimCtl.list_devices.where(name: name, os: runtime.name).each do |device|
+          list_devices.where(name: name, os: runtime.name).each do |device|
             device.shutdown! if device.state != 'Shutdown'
             device.delete!
           end
