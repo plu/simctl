@@ -19,6 +19,14 @@ module SimCtl
       SimCtl.erase_device(self)
     end
 
+    def kill!
+      SimCtl.kill_device(self)
+    end
+
+    def launch!
+      SimCtl.launch_device(self)
+    end
+
     # Shutdown the device
     def shutdown!
       SimCtl.shutdown_device(self)
