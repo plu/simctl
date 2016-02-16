@@ -25,6 +25,7 @@ module SimCtl
       def reset_device(name, device_type, runtime)
         begin
           list_devices.where(name: name, os: runtime.name).each do |device|
+            device.kill!
             device.shutdown! if device.state != 'Shutdown'
             device.delete!
           end
