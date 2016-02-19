@@ -5,6 +5,7 @@ require 'simctl/command/erase'
 require 'simctl/command/kill'
 require 'simctl/command/launch'
 require 'simctl/command/list'
+require 'simctl/command/reset'
 require 'simctl/command/shutdown'
 require 'simctl/executor'
 
@@ -17,6 +18,7 @@ module SimCtl
     include SimCtl::Command::Kill
     include SimCtl::Command::Launch
     include SimCtl::Command::List
+    include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
   end
 end
