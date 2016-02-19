@@ -17,6 +17,8 @@ gem 'simctl'
 
 ### boot_device
 
+Boots the given device (without launching an instance of the Simulator.app).
+
 ```ruby
 device = SimCtl.device(name: 'my iphone 5', state: 'Shutdown')
 SimCtl.boot_device(device)
@@ -28,6 +30,8 @@ SimCtl.device(name: 'my iphone 5', state: 'Shutdown').boot!
 
 ### create_device
 
+Creates and returns a new device with the given name, device type and runtime.
+
 ```ruby
 SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
 
@@ -35,6 +39,8 @@ SimCtl.create_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.
 ```
 
 ### delete_device
+
+Deletes a device.
 
 ```ruby
 device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
@@ -47,6 +53,8 @@ SimCtl.device(name: 'my iphone 5', state: 'Booted').delete!
 
 ### devicetype
 
+Find a device type by name (useful for creating new devices).
+
 ```ruby
 SimCtl.devicetype(name: 'iPhone 5')
 
@@ -55,6 +63,8 @@ SimCtl.devicetype(name: 'iPhone 5')
 
 ### device
 
+Find a device by the given properties.
+
 ```ruby
 SimCtl.device(name: 'my iphone 5', state: 'Booted')
 
@@ -62,6 +72,8 @@ SimCtl.device(name: 'my iphone 5', state: 'Booted')
 ```
 
 ### erase_device
+
+Erases the given device.
 
 ```ruby
 device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
@@ -72,7 +84,35 @@ SimCtl.erase_device(device)
 SimCtl.device(name: 'my iphone 5', state: 'Booted').erase!
 ```
 
+### kill_device
+
+Kills the Simulator.app instance that is currently running with the given device.
+
+```ruby
+device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
+SimCtl.kill_device(device)
+
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Booted').kill!
+```
+
+### launch_device
+
+Launch a new (separate) instance of the Simulator.app with the given device.
+
+```ruby
+device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
+SimCtl.launch_device(device)
+
+# or:
+
+SimCtl.device(name: 'my iphone 5', state: 'Booted').launch!
+```
+
 ### list_devices
+
+Returns all available devices.
 
 ```ruby
 SimCtl.list_devices.each do |device|
@@ -84,6 +124,8 @@ end
 ```
 
 ### list_devicetypes
+
+Returns all available device types.
 
 ```ruby
 SimCtl.list_devicetypes.each do |devicetype|
@@ -109,6 +151,8 @@ end
 
 ### list_runtimes
 
+Returns all available runtimes.
+
 ```ruby
 SimCtl.list_runtimes.each do |runtime|
   puts runtime.inspect
@@ -126,6 +170,8 @@ end
 
 ### reset_device
 
+This will `kill`, `shutdown`, `delete` and finally `create` the device.
+
 ```ruby
 SimCtl.reset_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.runtime(name: 'iOS 9.2')
 
@@ -134,6 +180,8 @@ SimCtl.reset_device 'my iphone 5', SimCtl.devicetype(name: 'iPhone 5'), SimCtl.r
 
 ### runtime
 
+Find a runtime by name (useful for creating new devices).
+
 ```ruby
 SimCtl.runtime(name: 'iOS 9.2')
 
@@ -141,6 +189,8 @@ SimCtl.runtime(name: 'iOS 9.2')
 ```
 
 ### shutdown_device
+
+Shuts down the given device.
 
 ```ruby
 device = SimCtl.device(name: 'my iphone 5', state: 'Booted')
