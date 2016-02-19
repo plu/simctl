@@ -13,6 +13,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   def teardown
     device = SimCtl.device(udid: @device.udid)
     return unless device
+    device.kill!
     device.shutdown! if device.state != 'Shutdown'
     device.delete!
   end
@@ -34,6 +35,13 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     assert device.os != nil
     assert device.state != nil
     assert device.udid != nil
+  end
+
+  should 'launch and kill the device created in setup' do
+    device = SimCtl.device(udid: @device.udid)
+    assert device.launch!
+    sleep 2
+    assert device.kill!
   end
 
   should 'erase the device created in setup' do
