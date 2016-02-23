@@ -14,6 +14,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     return unless device
     device.kill!
     device.shutdown! if device.state != :shutdown
+    device.wait! {|d| d.state == :shutdown}
     device.delete!
   end
 
