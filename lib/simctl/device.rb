@@ -6,7 +6,7 @@ module SimCtl
     attr_reader :availability, :name, :os, :state, :udid
 
     def boot!
-      SimCtl.boot_device(self) if state == :shutdown
+      SimCtl.boot_device(self)
     end
 
     def delete!
@@ -26,7 +26,7 @@ module SimCtl
     end
 
     def shutdown!
-      SimCtl.shutdown_device(self) if state == :booted
+      SimCtl.shutdown_device(self)
     end
 
     def state
