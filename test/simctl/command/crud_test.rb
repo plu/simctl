@@ -6,14 +6,14 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
     @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
     @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    @device.wait! {|device| device.state != 'Creating'}
+    @device.wait! {|device| device.state != :creating}
   end
 
   def teardown
     device = SimCtl.device(udid: @device.udid)
     return unless device
     device.kill!
-    device.shutdown! if device.state != 'Shutdown'
+    device.shutdown! if device.state != :shutdown
     device.delete!
   end
 
@@ -30,7 +30,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   should 'launch and kill the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
     assert device.launch!
-    sleep 2
+    device.wait!{|device| device.state == :booted}
     assert device.kill!
   end
 
@@ -42,9 +42,9 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   should 'boot/shutdown the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
     SimCtl.boot_device device
-    device.wait! {|device| device.state == 'Booted'}
+    device.wait! {|device| device.state == :booted}
     SimCtl.shutdown_device device
-    device.wait! {|device| device.state == 'Shutdown'}
+    device.wait! {|device| device.state == :shutdown}
   end
 
   should 'delete the device created in setup' do
@@ -58,6 +58,6 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     assert_kind_of SimCtl::Device, device
     assert_nil SimCtl.device(udid: @device.udid)
     @device = device # teardown cleanup
-    device.wait! {|device| device.state != 'Creating'}
+    device.wait! {|device| device.state != :creating}
   end
 end

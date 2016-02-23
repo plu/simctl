@@ -12,7 +12,7 @@ module SimCtl
         begin
           list_devices.where(name: name, os: runtime.name).each do |device|
             device.kill!
-            device.shutdown! if device.state != 'Shutdown'
+            device.shutdown! if device.state != :shutdown
             device.delete!
           end
         rescue Exception => exception
