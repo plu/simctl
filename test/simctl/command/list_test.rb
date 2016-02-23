@@ -57,4 +57,10 @@ class SimCtl::Command::ListTest < Minitest::Test
     end
   end
 
+  context 'unknown method' do
+    should 'raise an exception' do
+      assert_raises { SimCtl.foo }
+    end
+  end
+
 end
