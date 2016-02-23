@@ -31,7 +31,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   should 'launch and kill the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
     assert device.launch!
-    device.wait!{|device| device.state == :booted}
+    device.wait!{|d| d.state == :booted}
     assert device.kill!
   end
 
@@ -43,9 +43,9 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   should 'boot/shutdown the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
     SimCtl.boot_device device
-    device.wait! {|device| device.state == :booted}
+    device.wait! {|d| d.state == :booted}
     SimCtl.shutdown_device device
-    device.wait! {|device| device.state == :shutdown}
+    device.wait! {|d| d.state == :shutdown}
   end
 
   should 'delete the device created in setup' do
@@ -59,6 +59,6 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     assert_kind_of SimCtl::Device, device
     assert_nil SimCtl.device(udid: @device.udid)
     @device = device # teardown cleanup
-    device.wait! {|device| device.state != :creating}
+    device.wait! {|d| d.state != :creating}
   end
 end
