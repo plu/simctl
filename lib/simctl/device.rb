@@ -1,4 +1,5 @@
 require 'simctl/object'
+require 'timeout'
 
 module SimCtl
   class Device < Object
@@ -26,6 +27,14 @@ module SimCtl
 
     def shutdown!
       SimCtl.shutdown_device(self)
+    end
+
+    def wait!(timeout=15)
+      Timeout::timeout(timeout) do
+        loop do
+          break if yield SimCtl.device(udid: udid)
+        end
+      end
     end
   end
 end
