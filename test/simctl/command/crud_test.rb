@@ -42,9 +42,9 @@ class SimCtl::Command::CRUDTest < Minitest::Test
 
   should 'boot/shutdown the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
-    SimCtl.boot_device device
+    device.boot!
     device.wait! {|d| d.state == :booted}
-    SimCtl.shutdown_device device
+    device.shutdown!
     device.wait! {|d| d.state == :shutdown}
   end
 
