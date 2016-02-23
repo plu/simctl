@@ -36,7 +36,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
 
   should 'erase the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
-    SimCtl.erase_device device
+    device.erase!
   end
 
   should 'boot/shutdown the device created in setup' do
