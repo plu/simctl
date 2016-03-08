@@ -6,7 +6,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
     @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
     @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    @device.wait! {|device| device.state != :creating}
+    @device.wait! {|d| d.state != :creating}
   end
 
   def teardown
@@ -15,6 +15,12 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     device.kill!
     device.shutdown! if device.state != :shutdown
     device.wait! {|d| d.state == :shutdown}
+    device.delete!
+  end
+
+  should 'lookup devicetype and runtime strings' do
+    device = SimCtl.create_device SecureRandom.hex, @devicetype.name, @runtime.name
+    device.wait! {|d| d.state != :creating}
     device.delete!
   end
 
@@ -33,6 +39,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     assert device.launch!
     device.wait!{|d| d.state == :booted}
     assert device.kill!
+    device.wait!{|d| d.state == :shutdown}
   end
 
   should 'erase the device created in setup' do
