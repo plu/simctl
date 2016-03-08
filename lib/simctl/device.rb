@@ -25,6 +25,10 @@ module SimCtl
       SimCtl.launch_device(self)
     end
 
+    def rename!(name)
+      SimCtl.rename_device(self, name)
+    end
+
     def shutdown!
       SimCtl.shutdown_device(self)
     end

@@ -54,6 +54,12 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     assert_nil SimCtl.device(udid: @device.udid)
   end
 
+  should 'rename the device created in setup' do
+    device = SimCtl.device(udid: @device.udid)
+    device.rename!('new name')
+    assert SimCtl.device(udid: @device.udid).name == 'new name'
+  end
+
   should 'reset the device created in setup' do
     device = SimCtl.reset_device @device.name, @devicetype, @runtime
     assert_kind_of SimCtl::Device, device
