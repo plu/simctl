@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module SimCtl
   class Command
     module Create
@@ -10,7 +12,7 @@ module SimCtl
       # @param runtime [SimCtl::Runtime] runtime of the new device
       # @return [SimCtl::Device] the device that was created
       def create_device(name, device_type, runtime)
-        Executor.execute([COMMAND, "'#{name}'", device_type.identifier, runtime.identifier]) do |identifier|
+        Executor.execute([COMMAND, Shellwords.shellescape(name), device_type.identifier, runtime.identifier]) do |identifier|
           device(udid: identifier)
         end
       end
