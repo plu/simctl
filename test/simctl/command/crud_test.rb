@@ -19,6 +19,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   end
 
   should 'have devicetype and runtime property' do
+    system "find ~/Library/Developer/CoreSimulator/Devices | grep #{@device.udid}"
     device = SimCtl.device(udid: @device.udid)
     assert device == @device
     assert device.devicetype == @devicetype
