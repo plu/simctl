@@ -44,5 +44,10 @@ module SimCtl
         end
       end
     end
+
+    def ==(other)
+      other.udid == udid
+    end
+
   end
 end
