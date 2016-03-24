@@ -19,7 +19,9 @@ module SimCtl
         rescue Exception => exception
           yield exception if block_given?
         end
-        create_device name, device_type, runtime
+        device = create_device name, device_type, runtime
+        device.wait! {|d| d.state == :shutdown}
+        device
       end
     end
   end
