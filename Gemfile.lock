@@ -2,10 +2,12 @@ PATH
   remote: .
   specs:
     simctl (1.1.0)
+      CFPropertyList
 
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.2)
     coveralls (0.8.10)
       json (~> 1.8)
       rest-client (>= 1.6.8, < 2)

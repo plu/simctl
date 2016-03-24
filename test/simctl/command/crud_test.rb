@@ -18,6 +18,13 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     device.delete!
   end
 
+  should 'have devicetype and runtime property' do
+    device = SimCtl.device(udid: @device.udid)
+    assert device == @device
+    assert device.devicetype == @devicetype
+    assert device.runtime == @runtime
+  end
+
   should 'lookup devicetype and runtime strings' do
     device = SimCtl.create_device SecureRandom.hex, @devicetype.name, @runtime.name
     device.wait! {|d| d.state != :creating}

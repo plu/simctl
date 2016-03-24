@@ -1,3 +1,5 @@
+require 'cfpropertylist'
+require 'ostruct'
 require 'simctl/object'
 require 'timeout'
 
@@ -11,6 +13,10 @@ module SimCtl
 
     def delete!
       SimCtl.delete_device(self)
+    end
+
+    def devicetype
+      @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
     end
 
     def erase!
@@ -27,6 +33,10 @@ module SimCtl
 
     def rename!(name)
       SimCtl.rename_device(self, name)
+    end
+
+    def runtime
+      @runtime ||= SimCtl.runtime(identifier: plist.runtime)
     end
 
     def shutdown!
@@ -47,6 +57,12 @@ module SimCtl
 
     def ==(other)
       other.udid == udid
+    end
+
+    private
+
+    def plist
+      @plist ||= OpenStruct.new(CFPropertyList.native_types(CFPropertyList::List.new(file: File.join(ENV['HOME'], 'Library/Developer/CoreSimulator/Devices', udid, 'device.plist')).value))
     end
 
   end
