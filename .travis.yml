@@ -2,8 +2,6 @@ language: objective-c
 osx_image: xcode7.2
 before_script:
   - export LANG=en_US.UTF-8
-  - xcrun simctl list -j
-  - find ~/Library/Developer/CoreSimulator/Devices | grep plist
 install: bundle
 script:
   - bundle exec rake

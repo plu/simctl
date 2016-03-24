@@ -6,7 +6,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
     @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
     @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    @device.wait! {|d| d.state != :creating}
+    @device.wait! {|d| d.state == :shutdown && File.exist?(d.send(:plist_path))}
   end
 
   def teardown
@@ -19,7 +19,6 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   end
 
   should 'have devicetype and runtime property' do
-    system "find ~/Library/Developer/CoreSimulator/Devices | grep #{@device.udid}"
     device = SimCtl.device(udid: @device.udid)
     assert device == @device
     assert device.devicetype == @devicetype

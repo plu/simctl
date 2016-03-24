@@ -62,7 +62,11 @@ module SimCtl
     private
 
     def plist
-      @plist ||= OpenStruct.new(CFPropertyList.native_types(CFPropertyList::List.new(file: File.join(ENV['HOME'], 'Library/Developer/CoreSimulator/Devices', udid, 'device.plist')).value))
+      @plist ||= OpenStruct.new(CFPropertyList.native_types(CFPropertyList::List.new(file: plist_path).value))
+    end
+
+    def plist_path
+      File.join(ENV['HOME'], 'Library/Developer/CoreSimulator/Devices', udid, 'device.plist')
     end
 
   end
