@@ -6,7 +6,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
     @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
     @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    @device.wait! {|d| d.state == :shutdown}
+    @device.wait! {|d| d.state != :creating}
   end
 
   def teardown
