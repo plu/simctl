@@ -43,7 +43,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
 
   should 'launch and kill the device created in setup' do
     device = SimCtl.device(udid: @device.udid)
-    assert device.launch!
+    assert SimCtl.launch_device(device)
     device.wait!{|d| d.state == :booted}
     assert device.kill!
     device.wait!{|d| d.state == :shutdown}
