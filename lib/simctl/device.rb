@@ -56,6 +56,8 @@ module SimCtl
     end
 
     def ==(other)
+      return false if other.nil?
+      return false unless other.kind_of? Device
       other.udid == udid
     end
 

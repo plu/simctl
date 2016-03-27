@@ -5,6 +5,8 @@ module SimCtl
     attr_reader :availability, :buildversion, :identifier, :name, :version
 
     def ==(other)
+      return false if other.nil?
+      return false unless other.kind_of? Runtime
       other.identifier == identifier
     end
 
