@@ -14,6 +14,8 @@ module SimCtl
       def create_device(name, devicetype, runtime)
         runtime = runtime(name: runtime) unless runtime.is_a?(Runtime)
         devicetype = devicetype(name: devicetype) unless devicetype.is_a?(DeviceType)
+        raise "Invalid runtime: #{runtime}" unless runtime.is_a?(Runtime)
+        raise "Invalid devicetype: #{devicetype}" unless devicetype.is_a?(DeviceType)
         Executor.execute([COMMAND, Shellwords.shellescape(name), devicetype.identifier, runtime.identifier]) do |identifier|
           device(udid: identifier)
         end
