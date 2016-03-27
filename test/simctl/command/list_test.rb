@@ -49,6 +49,18 @@ class SimCtl::Command::ListTest < Minitest::Test
     should 'parse name property' do
       assert SimCtl.list_runtimes.first.name != nil
     end
+
+    should 'return latest ios runtime' do
+      assert_kind_of SimCtl::Runtime, SimCtl::Runtime.latest(:ios)
+    end
+
+    should 'return latest tvos runtime' do
+      assert_kind_of SimCtl::Runtime, SimCtl::Runtime.latest(:tvos)
+    end
+
+    should 'return latest watchos runtime' do
+      assert_kind_of SimCtl::Runtime, SimCtl::Runtime.latest(:watchos)
+    end
   end
 
   context 'runtime' do
