@@ -8,10 +8,16 @@ module SimCtl
     # @param filter [Hash] the filters that should be applied
     # @return [Array] the filtered array.
     def where(filter)
+      return self if filter.nil?
       select do |item|
         matches = true
         filter.each do |key, value|
-          matches &= item.send(key) == value
+          case value
+          when Regexp
+            matches &= item.send(key) =~ value
+          else
+            matches &= item.send(key) == value
+          end
         end
         matches
       end
