@@ -10,10 +10,14 @@ module SimCtl
           output = io.read
           raise StandardError.new(output) if result.value.to_i > 0
           return unless block_given?
-          if looks_like_json?(output)
-            yield JSON.parse(output)
-          else
-            yield output.chomp
+          begin
+            if looks_like_json?(output)
+              yield JSON.parse(output)
+            else
+              yield output.chomp
+            end
+          rescue StandardError => e
+            raise StandardError.new("Failed to execute '#{command}' (output: '#{output.chomp}'): #{e}")
           end
         end
       end
