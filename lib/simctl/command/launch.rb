@@ -13,7 +13,7 @@ module SimCtl
         # Launching the same device twice does not work.
         # Simulator.app would just hang. Solution: Kill first.
         kill_device(device)
-        command = "open -n #{XCODE_HOME}/Applications/Simulator.app --args -ConnectHardwareKeyboard 0 -CurrentDeviceUDID #{device.udid} -SimulatorWindowLastScale-#{device.devicetype.identifier} #{scale}"
+        command = "open -Fgn #{XCODE_HOME}/Applications/Simulator.app --args -ConnectHardwareKeyboard 0 -CurrentDeviceUDID #{device.udid} -SimulatorWindowLastScale-#{device.devicetype.identifier} #{scale}"
         system command
       end
     end
