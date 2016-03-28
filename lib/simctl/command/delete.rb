@@ -10,6 +10,18 @@ module SimCtl
       def delete_device(device)
         Executor.execute([COMMAND, device.udid])
       end
+
+      # Delete all devices
+      #
+      # @return [SimCtl::List] a list of all deleted SimCtl::Device objects
+      def delete_all_devices
+        list_devices.each do |device|
+          device.kill!
+          device.shutdown! if device.state != :shutdown
+          device.wait! {|d| d.state == :shutdown}
+          device.delete!
+        end
+      end
     end
   end
 end
