@@ -2,83 +2,95 @@ require 'securerandom'
 require 'test_helper'
 
 class SimCtl::Command::CRUDTest < Minitest::Test
-  def setup
-    @devicetype = SimCtl.list_devicetypes.select {|devicetype| devicetype.name =~ %r[iPhone]}.first
-    @runtime = SimCtl.list_runtimes.select {|runtime| runtime.name =~ %r[iOS.*9]}.first
-    @device = SimCtl.create_device SecureRandom.hex, @devicetype, @runtime
-    @device.wait! {|d| d.state != :creating}
+  order_dependent!
+
+  udid = nil
+  name = SecureRandom.hex
+  devicetype = 'iPhone 5'
+
+  should 'raise exception if devicetype lookup failed' do
+    assert_raises { SimCtl.create_device SecureRandom.hex, 'invalid devicetype', SimCtl::Runtime.latest(:ios) }
   end
 
-  def teardown
-    device = SimCtl.device(udid: @device.udid)
-    return unless device
-    device.kill!
-    device.shutdown! if device.state != :shutdown
+  should 'raise exception if runtime lookup failed' do
+    assert_raises { SimCtl.create_device name, SimCtl::DeviceType.find(name: devicetype), 'invalid runtime' }
+  end
+
+  should '01. create a new device' do
+    device = SimCtl.create_device name, devicetype, SimCtl::Runtime.latest(:ios)
     device.wait! {|d| d.state == :shutdown}
-    device.delete!
+    udid = device.udid
   end
 
-  #should 'have devicetype and runtime property' do
-  #  device = SimCtl.device(udid: @device.udid)
-  #  assert device == @device
-  #  assert device.devicetype == @devicetype
-  #  assert device.runtime == @runtime
-  #end
-
-  should 'lookup devicetype and runtime strings' do
-    device = SimCtl.create_device SecureRandom.hex, @devicetype.name, @runtime.name
-    device.wait! {|d| d.state != :creating}
-    device.delete!
-  end
-
-  should 'find the device created in setup' do
-    device = SimCtl.device(udid: @device.udid)
+  should '02. find the device by udid' do
+    device = SimCtl.device(udid: udid)
     assert_kind_of SimCtl::Device, device
     assert device.availability != nil
-    assert device.name != nil
+    assert device.name == name
     assert device.os != nil
     assert device.state != nil
     assert device.udid != nil
   end
 
-  should 'launch and kill the device created in setup' do
-    device = SimCtl.device(udid: @device.udid)
-    assert SimCtl.launch_device(device)
+  should '03. find the device by name' do
+    assert SimCtl.device(name: name).udid == udid
+  end
+
+  should '04. have devicetype property' do
+    assert SimCtl.device(udid: udid).devicetype == SimCtl.devicetype(name: devicetype)
+  end
+
+  should '05. have runtime property' do
+    assert SimCtl.device(udid: udid).runtime == SimCtl::Runtime.latest(:ios)
+  end
+
+  should '06. rename the device' do
+    SimCtl.device(udid: udid).rename!('new name')
+    assert SimCtl.device(udid: udid).name == 'new name'
+  end
+
+  should '07. erase the device' do
+    SimCtl.device(udid: udid).erase!
+  end
+
+  should '08. launch the device' do
+    device = SimCtl.device(udid: udid)
+    device.launch!
     device.wait!{|d| d.state == :booted}
+  end
+
+  should '09. kill the device' do
+    device = SimCtl.device(udid: udid)
     assert device.kill!
     device.wait!{|d| d.state == :shutdown}
   end
 
-  should 'erase the device created in setup' do
-    device = SimCtl.device(udid: @device.udid)
-    device.erase!
-  end
-
-  should 'boot/shutdown the device created in setup' do
-    device = SimCtl.device(udid: @device.udid)
+  should '10. boot the device' do
+    device = SimCtl.device(udid: udid)
     device.boot!
-    device.wait! {|d| d.state == :booted}
+    device.wait!{|d| d.state == :booted}
+  end
+
+  should '11. shutdown the device' do
+    device = SimCtl.device(udid: udid)
     device.shutdown!
-    device.wait! {|d| d.state == :shutdown}
+    device.wait!{|d| d.state == :shutdown}
   end
 
-  should 'delete the device created in setup' do
-    device = SimCtl.device(udid: @device.udid)
-    SimCtl.delete_device device
-    assert_nil SimCtl.device(udid: @device.udid)
+  should '12. reset the device' do
+    old_device = SimCtl.device(udid: udid)
+    new_device = SimCtl.reset_device old_device.name, old_device.devicetype, old_device.runtime
+    new_device.wait!{|d| d.state != :creating}
+    assert old_device.name == new_device.name
+    assert old_device.devicetype == new_device.devicetype
+    assert old_device.runtime == new_device.runtime
+    assert old_device.udid != new_device.udid
+    udid = new_device.udid
   end
 
-  should 'rename the device created in setup' do
-    device = SimCtl.device(udid: @device.udid)
-    device.rename!('new name')
-    assert SimCtl.device(udid: @device.udid).name == 'new name'
-  end
-
-  should 'reset the device created in setup' do
-    device = SimCtl.reset_device @device.name, @devicetype, @runtime
-    assert_kind_of SimCtl::Device, device
-    assert_nil SimCtl.device(udid: @device.udid)
-    @device = device # teardown cleanup
-    device.wait! {|d| d.state != :creating}
+  should '13. delete the device' do
+    device = SimCtl.device(udid: udid)
+    device.delete!
+    assert_nil SimCtl.device(udid: udid)
   end
 end
