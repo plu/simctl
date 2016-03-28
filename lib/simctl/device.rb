@@ -27,8 +27,8 @@ module SimCtl
       SimCtl.kill_device(self)
     end
 
-    def launch!(scale=1.0)
-      SimCtl.launch_device(self, scale)
+    def launch!(scale=1.0, opts={})
+      SimCtl.launch_device(self, scale, opts)
     end
 
     def rename!(name)
