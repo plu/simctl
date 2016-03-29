@@ -35,6 +35,10 @@ module SimCtl
       SimCtl.rename_device(self, name)
     end
 
+    def reset!
+      SimCtl.reset_device name, devicetype, runtime
+    end
+
     def runtime
       @runtime ||= SimCtl.runtime(identifier: plist.runtime)
     end
