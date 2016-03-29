@@ -8,18 +8,30 @@ module SimCtl
   class Device < Object
     attr_reader :availability, :name, :os, :state, :udid
 
+    # Boots the device
+    #
+    # @return [void]
     def boot!
       SimCtl.boot_device(self)
     end
 
+    # Deletes the device
+    #
+    # @return [void]
     def delete!
       SimCtl.delete_device(self)
     end
 
+    # Returns the device type
+    #
+    # @return [SimCtl::DeviceType]
     def devicetype
       @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
     end
 
+    # Disables the keyboard helpers
+    #
+    # @return [void]
     def disable_keyboard_helpers!
       path.edit path.preferences_plist do |plist|
         %w(
@@ -38,14 +50,23 @@ module SimCtl
       end
     end
 
+    # Erases the device
+    #
+    # @return [void]
     def erase!
       SimCtl.erase_device(self)
     end
 
+    # Kills the device
+    #
+    # @return [void]
     def kill!
       SimCtl.kill_device(self)
     end
 
+    # Launches the Simulator
+    #
+    # @return [void]
     def launch!(scale=1.0, opts={})
       SimCtl.launch_device(self, scale, opts)
     end
@@ -54,26 +75,44 @@ module SimCtl
       @path ||= DevicePath.new(udid)
     end
 
+    # Renames the device
+    #
+    # @return [void]
     def rename!(name)
       SimCtl.rename_device(self, name)
     end
 
+    # Resets the device
+    #
+    # @return [void]
     def reset!
       SimCtl.reset_device name, devicetype, runtime
     end
 
+    # Resets the runtime
+    #
+    # @return [SimCtl::Runtime]
     def runtime
       @runtime ||= SimCtl.runtime(identifier: plist.runtime)
     end
 
+    # Shuts down the runtime
+    #
+    # @return [void]
     def shutdown!
       SimCtl.shutdown_device(self)
     end
 
+    # Returns the state of the device
+    #
+    # @return [sym]
     def state
       @state.downcase.to_sym
     end
 
+    # Reloads the device until the given block returns true
+    #
+    # @return [void]
     def wait!(timeout=15)
       Timeout::timeout(timeout) do
         loop do
