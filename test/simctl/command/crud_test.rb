@@ -34,6 +34,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
 
   should '03. find the device by name' do
     assert SimCtl.device(name: name).udid == udid
+    assert SimCtl.device(name: name) == SimCtl.device(udid: udid)
   end
 
   should '04. have devicetype property' do
@@ -77,9 +78,15 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     device.wait!{|d| d.state == :shutdown}
   end
 
-  should '12. reset the device' do
+  should '12. disable keyboard helpers' do
+    device = SimCtl.device(udid: udid)
+    device.disable_keyboard_helpers!
+    assert File.exists?(device.path.preferences_plist)
+  end
+
+  should '98. reset the device' do
     old_device = SimCtl.device(udid: udid)
-    new_device = SimCtl.reset_device old_device.name, old_device.devicetype, old_device.runtime
+    new_device = old_device.reset!
     new_device.wait!{|d| d.state != :creating}
     assert old_device.name == new_device.name
     assert old_device.devicetype == new_device.devicetype
@@ -88,7 +95,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     udid = new_device.udid
   end
 
-  should '13. delete the device' do
+  should '99. delete the device' do
     device = SimCtl.device(udid: udid)
     device.delete!
     assert_nil SimCtl.device(udid: udid)
