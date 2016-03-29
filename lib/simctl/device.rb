@@ -1,5 +1,6 @@
 require 'cfpropertylist'
 require 'ostruct'
+require 'simctl/device_path'
 require 'simctl/object'
 require 'timeout'
 
@@ -29,6 +30,10 @@ module SimCtl
 
     def launch!(scale=1.0, opts={})
       SimCtl.launch_device(self, scale, opts)
+    end
+
+    def path
+      @path ||= DevicePath.new(udid)
     end
 
     def rename!(name)
@@ -68,11 +73,7 @@ module SimCtl
     private
 
     def plist
-      @plist ||= OpenStruct.new(CFPropertyList.native_types(CFPropertyList::List.new(file: plist_path).value))
-    end
-
-    def plist_path
-      File.join(ENV['HOME'], 'Library/Developer/CoreSimulator/Devices', udid, 'device.plist')
+      @plist ||= OpenStruct.new(CFPropertyList.native_types(CFPropertyList::List.new(file: path.device_plist).value))
     end
 
   end
