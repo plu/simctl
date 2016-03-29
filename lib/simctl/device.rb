@@ -20,6 +20,24 @@ module SimCtl
       @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
     end
 
+    def disable_keyboard_helpers!
+      path.edit path.preferences_plist do |plist|
+        %w(
+          KeyboardPeriodShortcut
+          KeyboardAutocapitalization
+          KeyboardCheckSpelling
+          KeyboardAssistant
+          KeyboardAutocorrection
+          KeyboardPrediction
+          KeyboardShowPredictionBar
+          KeyboardCapsLock
+        ).each do |key|
+          plist[key] = false
+        end
+        plist
+      end
+    end
+
     def erase!
       SimCtl.erase_device(self)
     end
