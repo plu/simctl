@@ -1,7 +1,9 @@
-require 'cfpropertylist'
+require 'simctl/helper'
 
 module SimCtl
   class DeviceSettings
+    include SimCtl::Helper
+
     attr_reader :path
 
     def initialize(path)
@@ -27,14 +29,6 @@ module SimCtl
           plist[key] = false
         end
       end
-    end
-
-    def edit_plist(path, &block)
-      plist = File.exists?(path) ? CFPropertyList::List.new(file: path) : CFPropertyList::List.new
-      content = CFPropertyList.native_types(plist.value) || {}
-      yield content
-      plist.value = CFPropertyList.guess(content)
-      plist.save(path, CFPropertyList::List::FORMAT_BINARY)
     end
 
     # Sets the device language
