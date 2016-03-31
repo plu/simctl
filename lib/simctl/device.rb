@@ -1,6 +1,7 @@
 require 'cfpropertylist'
 require 'ostruct'
 require 'simctl/device_path'
+require 'simctl/device_settings'
 require 'simctl/object'
 require 'timeout'
 
@@ -29,25 +30,12 @@ module SimCtl
       @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
     end
 
+    # <b>DEPRECATED:</b> Please use <tt>device.settings.disable_keyboard_helpers!</tt> instead.
     # Disables the keyboard helpers
     #
     # @return [void]
     def disable_keyboard_helpers!
-      path.edit path.preferences_plist do |plist|
-        %w(
-          KeyboardPeriodShortcut
-          KeyboardAutocapitalization
-          KeyboardCheckSpelling
-          KeyboardAssistant
-          KeyboardAutocorrection
-          KeyboardPrediction
-          KeyboardShowPredictionBar
-          KeyboardCapsLock
-        ).each do |key|
-          plist[key] = false
-        end
-        plist
-      end
+      settings.disable_keyboard_helpers!
     end
 
     # Erases the device
@@ -94,6 +82,13 @@ module SimCtl
     # @return [SimCtl::Runtime]
     def runtime
       @runtime ||= SimCtl.runtime(identifier: plist.runtime)
+    end
+
+    # Returns the settings object
+    #
+    # @ return [SimCtl::DeviceSettings]
+    def settings
+      @settings ||= DeviceSettings.new(path)
     end
 
     # Shuts down the runtime

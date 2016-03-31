@@ -80,7 +80,7 @@ class SimCtl::Command::CRUDTest < Minitest::Test
 
   should '12. disable keyboard helpers' do
     device = SimCtl.device(udid: udid)
-    device.disable_keyboard_helpers!
+    device.settings.disable_keyboard_helpers!
     assert File.exists?(device.path.preferences_plist)
   end
 
