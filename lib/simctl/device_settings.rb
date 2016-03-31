@@ -14,14 +14,15 @@ module SimCtl
     def disable_keyboard_helpers!
       edit(path.preferences_plist) do |plist|
         %w(
-          KeyboardPeriodShortcut
-          KeyboardAutocapitalization
-          KeyboardCheckSpelling
+          KeyboardAllowPaddle
           KeyboardAssistant
+          KeyboardAutocapitalization
           KeyboardAutocorrection
+          KeyboardCapsLock
+          KeyboardCheckSpelling
+          KeyboardPeriodShortcut
           KeyboardPrediction
           KeyboardShowPredictionBar
-          KeyboardCapsLock
         ).each do |key|
           plist[key] = false
         end
