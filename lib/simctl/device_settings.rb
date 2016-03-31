@@ -12,7 +12,7 @@ module SimCtl
     #
     # @return [void]
     def disable_keyboard_helpers!
-      edit(path.preferences_plist) do |plist|
+      edit_plist(path.preferences_plist) do |plist|
         %w(
           KeyboardAllowPaddle
           KeyboardAssistant
@@ -30,9 +30,7 @@ module SimCtl
       end
     end
 
-    private
-
-    def edit(path, &block)
+    def edit_plist(path, &block)
       plist = File.exists?(path) ? CFPropertyList::List.new(file: path) : CFPropertyList::List.new
       content = CFPropertyList.native_types(plist.value) || {}
       plist.value = CFPropertyList.guess(yield content)
