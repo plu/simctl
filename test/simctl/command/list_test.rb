@@ -5,6 +5,10 @@ class SimCtl::Command::ListTest < Minitest::Test
     should 'find device type by name' do
       assert_kind_of SimCtl::DeviceType, SimCtl.devicetype(name: 'iPhone 5')
     end
+
+    should 'raise exception if device type is not found' do
+      assert_raises { SimCtl.devicetype(name: 'iPhone 1') }
+    end
   end
 
   context 'list_devicetypes' do
@@ -65,7 +69,11 @@ class SimCtl::Command::ListTest < Minitest::Test
 
   context 'runtime' do
     should 'find runtime by name' do
-      assert_kind_of SimCtl::Runtime, SimCtl.runtime(name: 'iOS 9.2')
+      assert_kind_of SimCtl::Runtime, SimCtl.runtime(name: 'iOS 9.3')
+    end
+
+    should 'raise exception if runtime is not found' do
+      assert_raises { SimCtl.runtime(name: 'iOS 17.0') }
     end
   end
 

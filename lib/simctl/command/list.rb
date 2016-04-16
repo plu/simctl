@@ -1,4 +1,6 @@
 module SimCtl
+  class DeviceTypeNotFound < StandardError; end
+  class RuntimeNotFound < StandardError; end
   class Command
     module List
       COMMAND = %w[xcrun simctl list -j]
@@ -14,9 +16,10 @@ module SimCtl
       # Find a device type
       #
       # @param filter [Hash] the filter
-      # @return [SimCtl::DeviceType, nil] the device type matching the given filter
+      # @return [SimCtl::DeviceType] the device type matching the given filter
+      # @raise [DeviceTypeNotFound] if the device type could not be found
       def devicetype(filter)
-        list_devicetypes.where(filter).first
+        list_devicetypes.where(filter).first or raise DeviceTypeNotFound.new("Could not find a device type matching #{filter.inspect}")
       end
 
       # List all devices
@@ -49,9 +52,10 @@ module SimCtl
       # Find a runtime
       #
       # @param filter [Hash] the filter
-      # @return [SimCtl::Runtime, nil] the runtime matching the given filter
+      # @return [SimCtl::Runtime] the runtime matching the given filter
+      # @raise [RuntimeNotFound] if the runtime could not be found
       def runtime(filter)
-        list_runtimes.where(filter).first
+        list_runtimes.where(filter).first or raise RuntimeNotFound.new("Could not find a runtime matching #{filter.inspect}")
       end
 
     end
