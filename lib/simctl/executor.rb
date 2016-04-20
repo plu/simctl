@@ -6,6 +6,7 @@ module SimCtl
     class << self
       def execute(command)
         command = command.flatten.join(' ')
+        $stderr.puts command if ENV['SIMCTL_DEBUG']
         Open3.popen3(command) do |stdin, stdout, stderr, result|
           output = stdout.read
           raise StandardError.new(output) if result.value.to_i > 0
