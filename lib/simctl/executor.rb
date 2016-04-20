@@ -9,7 +9,10 @@ module SimCtl
         $stderr.puts command if ENV['SIMCTL_DEBUG']
         Open3.popen3(command) do |stdin, stdout, stderr, result|
           output = stdout.read
-          raise StandardError.new(output) if result.value.to_i > 0
+          if result.value.to_i > 0
+            output = stderr.read if output.empty?
+            raise StandardError.new(output)
+          end
           return unless block_given?
           if looks_like_json?(output)
             yield JSON.parse(output)
