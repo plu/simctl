@@ -59,6 +59,16 @@ module SimCtl
       SimCtl.launch_device(self, scale, opts)
     end
 
+    # Launches an app in the given device
+    #
+    # @param opts [Hash] options hash - `{ wait_for_debugger: true/false }`
+    # @param identifier [String] the app identifier
+    # @param args [Array] optional launch arguments
+    # @return [void]
+    def launch_app!(identifier, args=[], opts={})
+      SimCtl.launch_app(self, identifier, args, opts)
+    end
+
     def path
       @path ||= DevicePath.new(udid)
     end
