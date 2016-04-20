@@ -60,6 +60,23 @@ class SimCtl::Command::CRUDTest < Minitest::Test
     device.wait!{|d| d.state == :booted}
   end
 
+  should '0810. launch safari' do
+    device = SimCtl.device(udid: udid)
+    device.launch_app!('com.apple.mobilesafari')
+  end
+
+  should '0820. install SampleApp' do
+    system 'cd test/SampleApp && xcodebuild -sdk iphonesimulator >/dev/null 2>&1'
+    device = SimCtl.device(udid: udid)
+    device.install!('test/SampleApp/build/Release-iphonesimulator/SampleApp.app')
+  end
+
+  should '0830. launch SampleApp' do
+    system 'cd test/SampleApp && xcodebuild -sdk iphonesimulator >/dev/null 2>&1'
+    device = SimCtl.device(udid: udid)
+    device.launch_app!('com.github.plu.simctl.SampleApp')
+  end
+
   should '0900. kill the device' do
     device = SimCtl.device(udid: udid)
     assert device.kill!
