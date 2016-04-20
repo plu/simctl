@@ -45,6 +45,14 @@ module SimCtl
       SimCtl.erase_device(self)
     end
 
+    # Installs an app on a device
+    #
+    # @param path Absolute path to the app that should be installed
+    # @return [void]
+    def install!(path)
+      SimCtl.install_app(self, path)
+    end
+
     # Kills the device
     #
     # @return [void]
