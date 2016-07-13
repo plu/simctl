@@ -126,7 +126,7 @@ module SimCtl
     # Reloads the device until the given block returns true
     #
     # @return [void]
-    def wait!(timeout=15)
+    def wait!(timeout=SimCtl.default_timeout)
       Timeout::timeout(timeout) do
         loop do
           break if yield SimCtl.device(udid: udid)

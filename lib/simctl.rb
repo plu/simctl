@@ -5,7 +5,17 @@ require 'simctl/list'
 require 'simctl/runtime'
 
 module SimCtl
+  @@default_timeout = 15
+
   class << self
+    def default_timeout
+      @@default_timeout
+    end
+
+    def default_timeout=(timeout)
+      @@default_timeout = timeout
+    end
+
     def command
       return @command if defined?(@command)
       @command = SimCtl::Command.new
