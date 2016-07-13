@@ -8,5 +8,5 @@ $LOAD_PATH.push File.expand_path("../../lib", __FILE__)
 require File.dirname(__FILE__) + '/../lib/simctl.rb'
 
 if ENV['TRAVIS']
-  SimCtl.default_timeout = 120
+  SimCtl.default_timeout = 300
 end
