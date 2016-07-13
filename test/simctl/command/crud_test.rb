@@ -104,8 +104,6 @@ class SimCtl::Command::CRUDTest < Minitest::Test
   should '9800. reset the device' do
     old_device = SimCtl.device(udid: udid)
     new_device = old_device.reset!
-    new_device.wait!{|d| d.state != :creating}
-    new_device.wait!{|d| File.exists?(d.path.device_plist)}
     assert old_device.name == new_device.name
     assert old_device.devicetype == new_device.devicetype
     assert old_device.runtime == new_device.runtime
