@@ -1,7 +1,7 @@
 require 'securerandom'
 require 'test_helper'
 
-class SimCtl::Command::CRUDTest < Minitest::Test
+class SimCtl::CRUDTest < Minitest::Test
   order_dependent!
 
   udid = nil

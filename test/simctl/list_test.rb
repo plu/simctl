@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SimCtl::Command::ListTest < Minitest::Test
+class SimCtl::ListTest < Minitest::Test
   context 'devicetype' do
     should 'find device type by name' do
       assert_kind_of SimCtl::DeviceType, SimCtl.devicetype(name: 'iPhone 5')

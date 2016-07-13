@@ -1,7 +1,7 @@
 require 'securerandom'
 require 'test_helper'
 
-class SimCtl::Command::ExecutorTest < Minitest::Test
+class SimCtl::ExecutorTest < Minitest::Test
   should 'raise exception' do
     assert_raises { SimCtl::Executor.execute(['xcrun simctl asdf']) }
   end
