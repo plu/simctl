@@ -25,6 +25,7 @@ device.launch!
 device.wait! {|d| d.state == :booted}
 
 # Kill the Simulator.app instance again
+device.shutdown!
 device.kill!
 
 # Wait until it did shutdown
