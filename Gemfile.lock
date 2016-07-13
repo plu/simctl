@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simctl (1.5.0)
+    simctl (1.5.1)
       CFPropertyList
 
 GEM
@@ -56,4 +56,4 @@ DEPENDENCIES
   simctl!
 
 BUNDLED WITH
-   1.11.2
+   1.12.5
