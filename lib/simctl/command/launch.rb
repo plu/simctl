@@ -20,7 +20,9 @@ module SimCtl
           '-ConnectHardwareKeyboard' => 1,
           '-CurrentDeviceUDID' => device.udid,
           "-SimulatorWindowLastScale-#{device.devicetype.identifier}" => scale,
-        }.merge(opts).zip.flatten.join(' ')
+        }
+        args.merge!({ '-DeviceSetPath' => SimCtl.device_set_path }) unless SimCtl.device_set_path.nil?
+        args = args.merge(opts).zip.flatten.join(' ')
         command = "open -Fgn #{XCODE_HOME}/Applications/Simulator.app --args #{args}"
         system command
       end
