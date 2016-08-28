@@ -35,7 +35,7 @@ module SimCtl
       def launch_app(device, identifier, args=[], opts={})
         launch_args = args.map {|arg| Shellwords.shellescape arg}
         launch_opts = opts[:wait_for_debugger] ? '-w' : ''
-        Executor.execute([LAUNCH_APP_COMMAND, launch_opts, device.udid, identifier, launch_args])
+        Executor.execute(command_for('launch', launch_opts, device.udid, identifier, launch_args))
       end
     end
   end
