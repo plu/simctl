@@ -3,5 +3,8 @@ osx_image: xcode7.3
 before_script:
   - export LANG=en_US.UTF-8
 install: bundle
+env:
+  - CUSTOM_DEVICE_SET_PATH=true
+  - CUSTOM_DEVICE_SET_PATH=false
 script:
   - bundle exec rake

@@ -11,4 +11,6 @@ if ENV['TRAVIS']
   SimCtl.default_timeout = 300
 end
 
-SimCtl.device_set_path = Dir.mktmpdir
+unless ENV['CUSTOM_DEVICE_SET_PATH'] == 'false'
+  SimCtl.device_set_path = Dir.mktmpdir
+end
