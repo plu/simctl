@@ -11,7 +11,7 @@ module SimCtl
       # @param path Absolute path to the app that should be installed
       # @return [void]
       def install_app(device, path)
-        Executor.execute([COMMAND, device.udid, Shellwords.shellescape(path)])
+        Executor.execute(command_for('install', device.udid, Shellwords.shellescape(path)))
       end
     end
   end

@@ -1,14 +1,12 @@
 module SimCtl
   class Command
     module Erase
-      COMMAND = %w[xcrun simctl erase]
-
       # Erase a device
       #
       # @param device [SimCtl::Device] the device to erase
       # @return [void]
       def erase_device(device)
-        Executor.execute([COMMAND, device.udid])
+        Executor.execute(command_for('erase', device.udid))
       end
     end
   end

@@ -3,8 +3,6 @@ require 'shellwords'
 module SimCtl
   class Command
     module Create
-      COMMAND = %w[xcrun simctl create]
-
       # Creates a device
       #
       # @param name [String] name of the new device
@@ -16,7 +14,7 @@ module SimCtl
         devicetype = devicetype(name: devicetype) unless devicetype.is_a?(DeviceType)
         raise "Invalid runtime: #{runtime}" unless runtime.is_a?(Runtime)
         raise "Invalid devicetype: #{devicetype}" unless devicetype.is_a?(DeviceType)
-        device = Executor.execute([COMMAND, Shellwords.shellescape(name), devicetype.identifier, runtime.identifier]) do |identifier|
+        device = Executor.execute(command_for('create', Shellwords.shellescape(name), devicetype.identifier, runtime.identifier)) do |identifier|
           device(udid: identifier)
         end
         device.wait! {|d| d.state == :shutdown && File.exists?(d.path.device_plist)}

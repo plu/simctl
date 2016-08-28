@@ -9,4 +9,5 @@ require File.dirname(__FILE__) + '/../lib/simctl.rb'
 
 if ENV['TRAVIS']
   SimCtl.default_timeout = 300
+  SimCtl.device_set_path = Dir.mktmpdir
 end

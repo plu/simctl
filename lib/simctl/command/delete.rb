@@ -1,14 +1,12 @@
 module SimCtl
   class Command
     module Delete
-      COMMAND = %w[xcrun simctl delete]
-
       # Delete a device
       #
       # @param device [SimCtl::Device] the device to delete
       # @return [void]
       def delete_device(device)
-        Executor.execute([COMMAND, device.udid])
+        Executor.execute(command_for('delete', device.udid))
       end
 
       # Delete all devices

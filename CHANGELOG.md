@@ -1,3 +1,7 @@
+# 1.5.2
+
+* Support custom device set path
+
 # 1.5.1
 
 * Let `SimCtl#create_device` wait for the device to be created

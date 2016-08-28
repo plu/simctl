@@ -3,8 +3,6 @@ module SimCtl
   class RuntimeNotFound < StandardError; end
   class Command
     module List
-      COMMAND = %w[xcrun simctl list -j]
-
       # Find a device
       #
       # @param filter [Hash] the filter
@@ -26,7 +24,7 @@ module SimCtl
       #
       # @return [SimCtl::List] a list of SimCtl::Device objects
       def list_devices
-        Executor.execute([COMMAND, 'devices']) do |json|
+        Executor.execute(command_for('list', '-j', 'devices')) do |json|
           SimCtl::List.new(json['devices'].map {|os, devices| devices.map {|device| Device.new(device.merge(os: os))}}.flatten)
         end
       end
@@ -35,7 +33,7 @@ module SimCtl
       #
       # @return [SimCtl::List] a list of SimCtl::DeviceType objects
       def list_devicetypes
-        Executor.execute([COMMAND, 'devicetypes']) do |json|
+        Executor.execute(command_for('list', '-j', 'devicetypes')) do |json|
           SimCtl::List.new(json['devicetypes'].map {|devicetype| DeviceType.new(devicetype)})
         end
       end
@@ -44,7 +42,7 @@ module SimCtl
       #
       # @return [SimCtl::List] a list of SimCtl::Runtime objects
       def list_runtimes
-        Executor.execute([COMMAND, 'runtimes']) do |json|
+        Executor.execute(command_for('list', '-j', 'runtimes')) do |json|
           SimCtl::List.new(json['runtimes'].map {|runtime| Runtime.new(runtime)})
         end
       end

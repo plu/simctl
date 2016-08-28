@@ -13,6 +13,8 @@ require 'simctl/executor'
 
 module SimCtl
   class Command
+    attr_accessor :device_set_path
+
     include SimCtl::Command::Boot
     include SimCtl::Command::Create
     include SimCtl::Command::Delete
@@ -24,5 +26,12 @@ module SimCtl
     include SimCtl::Command::Rename
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
+
+    def command_for(*arguments)
+      command = %w[xcrun simctl]
+      command += ['--set', device_set_path] unless device_set_path.nil?
+      command += arguments
+      command
+    end
   end
 end
