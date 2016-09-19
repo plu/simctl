@@ -77,6 +77,14 @@ module SimCtl
       SimCtl.launch_app(self, identifier, args, opts)
     end
 
+    # Opens the url on the device
+    #
+    # @param url [String] The url to be opened on the device
+    # @return [void]
+    def open_url!(url)
+      SimCtl.open_url(url)
+    end
+
     def path
       @path ||= DevicePath.new(udid)
     end
