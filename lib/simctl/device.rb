@@ -82,7 +82,7 @@ module SimCtl
     # @param url [String] The url to be opened on the device
     # @return [void]
     def open_url!(url)
-      SimCtl.open_url(url)
+      SimCtl.open_url(self, url)
     end
 
     def path
