@@ -3,8 +3,6 @@ require 'shellwords'
 module SimCtl
   class Command
     module OpenUrl
-      COMMAND = %w[xcrun simctl openurl]
-
       # Opens a url
       #
       # @param device [SimCtl::Device] the device that should open the url
