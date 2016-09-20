@@ -7,8 +7,8 @@ module SimCtl
 
       # Opens a url
       #
-      # @param device [SimCtl::Device] the device the app should be installed on
-      # @param url The url to open on the tdevice
+      # @param device [SimCtl::Device] the device that should open the url
+      # @param url The url to open on the device
       # @return [void]
       def open_url(device, url)
         Executor.execute(command_for('openurl', device.udid, Shellwords.shellescape(url)))
