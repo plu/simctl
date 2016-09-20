@@ -9,6 +9,7 @@ require 'simctl/command/list'
 require 'simctl/command/rename'
 require 'simctl/command/reset'
 require 'simctl/command/shutdown'
+require 'simctl/command/openurl'
 require 'simctl/executor'
 
 module SimCtl
@@ -26,6 +27,7 @@ module SimCtl
     include SimCtl::Command::Rename
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
+    include SimCtl::Command::OpenUrl
 
     def command_for(*arguments)
       command = %w[xcrun simctl]
