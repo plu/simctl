@@ -53,6 +53,14 @@ module SimCtl
       SimCtl.install_app(self, path)
     end
 
+    # Uninstall an app from a device
+    #
+    # @param app_id App identifier of the app that should be uninstalled
+    # @return [void]
+    def uninstall!(app_id)
+      SimCtl.uninstall_app(self, app_id)
+    end
+
     # Kills the device
     #
     # @return [void]
