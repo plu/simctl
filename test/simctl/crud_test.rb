@@ -82,6 +82,13 @@ class SimCtl::CRUDTest < Minitest::Test
     device.open_url!('https://www.github.com')
   end
 
+  should '0850. uninstall SampleApp' do
+    system 'cd test/SampleApp && xcodebuild -sdk iphonesimulator >/dev/null 2>&1'
+    device = SimCtl.device(udid: udid)
+    device.install!('test/SampleApp/build/Release-iphonesimulator/SampleApp.app')
+    device.uninstall!('com.github.plu.simctl.SampleApp')
+  end
+
   should '0900. kill the device' do
     device = SimCtl.device(udid: udid)
     assert device.kill!
