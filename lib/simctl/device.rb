@@ -158,6 +158,7 @@ module SimCtl
           break if yield SimCtl.device(udid: udid)
         end
       end
+      reload!
     end
 
     def ==(other)
