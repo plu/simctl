@@ -97,6 +97,16 @@ module SimCtl
       @path ||= DevicePath.new(udid)
     end
 
+    # Reloads the device information
+    #
+    # @return [void]
+    def reload!
+      device = SimCtl.device(udid: udid)
+      device.instance_variables.each do |ivar|
+        instance_variable_set(ivar, device.instance_variable_get(ivar))
+      end
+    end
+
     # Renames the device
     #
     # @return [void]
