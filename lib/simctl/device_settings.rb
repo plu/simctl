@@ -29,6 +29,16 @@ module SimCtl
       end
     end
 
+    # Updates hardware keyboard settings
+    #
+    # @param enabled value to replace
+    # @return [vod]
+    def update_hardware_keyboard!(enabled)
+      edit_plist(path.preferences_plist) do |plist|
+        plist['AutomaticMinimizationEnabled'] = enabled
+      end
+    end
+
     def edit_plist(path, &block)
       plist = File.exists?(path) ? CFPropertyList::List.new(file: path) : CFPropertyList::List.new
       content = CFPropertyList.native_types(plist.value) || {}
