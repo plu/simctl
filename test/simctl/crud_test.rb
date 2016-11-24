@@ -113,6 +113,12 @@ class SimCtl::CRUDTest < Minitest::Test
     assert File.exists?(device.path.preferences_plist)
   end
 
+  should '1300. update hardware keyboard' do
+    device = SimCtl.device(udid: udid)
+    device.settings.update_hardware_keyboard!(false)
+    assert File.exists?(device.path.preferences_plist)
+  end
+
   should '9800. reset the device' do
     old_device = SimCtl.device(udid: udid)
     new_device = old_device.reset!
