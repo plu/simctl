@@ -21,7 +21,7 @@ module SimCtl
           '-CurrentDeviceUDID' => device.udid,
           "-SimulatorWindowLastScale-#{device.devicetype.identifier}" => scale,
         }
-        args.merge!({ '-DeviceSetPath' => SimCtl.device_set_path }) unless SimCtl.device_set_path.nil?
+        args.merge!({ '-DeviceSetPath' => Shellwords.shellescape(SimCtl.device_set_path) }) unless SimCtl.device_set_path.nil?
         args = args.merge(opts).zip.flatten.join(' ')
         command = "open -Fgn #{XCODE_HOME}/Applications/Simulator.app --args #{args}"
         system command

@@ -12,6 +12,7 @@ require 'simctl/command/reset'
 require 'simctl/command/shutdown'
 require 'simctl/command/openurl'
 require 'simctl/executor'
+require 'shellwords'
 
 module SimCtl
   class Command
@@ -31,9 +32,13 @@ module SimCtl
     include SimCtl::Command::Shutdown
     include SimCtl::Command::OpenUrl
 
+    def device_set_path=(device_set_path)
+      @device_set_path = File.expand_path(device_set_path)
+    end
+
     def command_for(*arguments)
       command = %w[xcrun simctl]
-      command += ['--set', device_set_path] unless device_set_path.nil?
+      command += ['--set', Shellwords.shellescape(device_set_path)] unless device_set_path.nil?
       command += arguments
       command
     end
