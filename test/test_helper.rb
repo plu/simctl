@@ -12,5 +12,5 @@ if ENV['TRAVIS']
 end
 
 unless ENV['CUSTOM_DEVICE_SET_PATH'] == 'false'
-  SimCtl.device_set_path = Dir.mktmpdir
+  SimCtl.device_set_path = Dir.mktmpdir 'foo bar'
 end
