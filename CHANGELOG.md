@@ -1,3 +1,19 @@
+# 1.5.6
+
+* Fix custom device set path with spaces
+
+# 1.5.5
+
+* Support updating the hardware keyboard setting
+
+# 1.5.4
+
+* Support uninstall command
+
+# 1.5.3
+
+* Support openurl command
+
 # 1.5.2
 
 * Support custom device set path
