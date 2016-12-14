@@ -1,3 +1,7 @@
+# 1.5.7
+
+* Fix SimCtl::Runtime.latest
+
 # 1.5.6
 
 * Fix custom device set path with spaces
