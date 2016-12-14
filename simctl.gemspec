@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coveralls'
 
   s.add_dependency 'CFPropertyList'
+  s.add_dependency 'naturally'
 end

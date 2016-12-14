@@ -1,3 +1,4 @@
+require 'naturally'
 require 'simctl/object'
 
 module SimCtl
@@ -15,7 +16,7 @@ module SimCtl
     # @param name [String] type (ios, watchos, tvos)
     # @return [SimCtl::Runtime] the latest available runtime
     def self.latest(type)
-      SimCtl.list_runtimes.where(name: %r|#{type}|i).sort_by {|r| r.version}.reverse.first
+      Naturally.sort_by(SimCtl.list_runtimes.where(name: %r|#{type}|i), :version).last
     end
   end
 end

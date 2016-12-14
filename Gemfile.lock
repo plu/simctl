@@ -3,6 +3,7 @@ PATH
   specs:
     simctl (1.5.6)
       CFPropertyList
+      naturally
 
 GEM
   remote: https://rubygems.org/
@@ -25,6 +26,7 @@ GEM
       minitest (>= 5.0.0, < 5.9.0)
     mime-types (2.99)
     minitest (5.8.5)
+    naturally (2.1.0)
     netrc (0.11.0)
     rake (10.4.2)
     rest-client (1.8.0)
