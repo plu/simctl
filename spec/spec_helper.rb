@@ -1,4 +1,8 @@
 require 'coveralls'
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'spec'
+end
 Coveralls.wear!
 
 $LOAD_PATH.push File.expand_path("../../lib", __FILE__)
