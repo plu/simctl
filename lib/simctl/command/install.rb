@@ -3,8 +3,6 @@ require 'shellwords'
 module SimCtl
   class Command
     module Install
-      COMMAND = %w[xcrun simctl install]
-
       # Installs an app on a device
       #
       # @param device [SimCtl::Device] the device the app should be installed on
