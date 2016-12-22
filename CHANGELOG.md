@@ -1,3 +1,5 @@
+# 1.5.8
+
 * Support taking screenshots
 * Breaking change: Remove `device.disable_keyboard_helpers!`
   Use `device.settings.disable_keyboard_helpers!` instead
