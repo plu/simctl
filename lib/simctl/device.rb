@@ -30,14 +30,6 @@ module SimCtl
       @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
     end
 
-    # <b>DEPRECATED:</b> Please use <tt>device.settings.disable_keyboard_helpers!</tt> instead.
-    # Disables the keyboard helpers
-    #
-    # @return [void]
-    def disable_keyboard_helpers!
-      settings.disable_keyboard_helpers!
-    end
-
     # Erases the device
     #
     # @return [void]
