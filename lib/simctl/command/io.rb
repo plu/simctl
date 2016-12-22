@@ -12,6 +12,9 @@ module SimCtl
       # * display: Can be main or tv for iOS, tv for tvOS and main for watchOS
       # @return [void]
       def screenshot(device, file, opts={})
+        unless XcodeVersion.gte? '8.2'
+          throw UnsupportedCommandError.new('Needs at least Xcode 8.2')
+        end
         optional_args = opts.map {|k,v| "--#{k}=#{Shellwords.shellescape(v)}"}
         Executor.execute(command_for('io', device.udid, 'screenshot', *optional_args, Shellwords.shellescape(file)))
       end

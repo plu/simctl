@@ -78,8 +78,15 @@ class SimCtl::CRUDTest < Minitest::Test
   end
 
   should '0835. take screenshot' do
-    device = SimCtl.device(udid: udid)
-    device.screenshot!('/tmp/screenshot.png')
+    if SimCtl::XcodeVersion.gte? '8.2'
+      dir = Dir.mktmpdir
+      file = File.join(dir, 'screenshot.png')
+      device = SimCtl.device(udid: udid)
+      device.screenshot!(file)
+      assert File.exists?(file)
+    else
+      assert_raises { device.screenshot!('/tmp/screenshot.png') }
+    end
   end
 
   should '0840. open some url' do

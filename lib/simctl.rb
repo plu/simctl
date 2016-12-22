@@ -3,8 +3,13 @@ require 'simctl/device'
 require 'simctl/device_type'
 require 'simctl/list'
 require 'simctl/runtime'
+require 'simctl/xcode_version'
 
 module SimCtl
+  class UnsupportedCommandError < StandardError; end
+  class DeviceTypeNotFound < StandardError; end
+  class RuntimeNotFound < StandardError; end
+
   @@default_timeout = 15
 
   class << self
