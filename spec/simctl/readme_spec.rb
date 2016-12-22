@@ -1,7 +1,7 @@
-require 'test_helper'
+require 'spec_helper'
 
-class SimCtl::ReadmeTest < Minitest::Test
-  should 'execute example code from readme' do
+RSpec.describe SimCtl do
+  it 'executes example code from readme' do
     # Select the iOS 9.3 runtime
     runtime = SimCtl.runtime(name: 'iOS 9.3')
 

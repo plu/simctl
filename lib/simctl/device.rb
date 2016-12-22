@@ -112,6 +112,7 @@ module SimCtl
     # @return [void]
     def rename!(name)
       SimCtl.rename_device(self, name)
+      @name = name
     end
 
     # Resets the device

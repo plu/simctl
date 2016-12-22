@@ -1,6 +1,4 @@
 module SimCtl
-  class DeviceTypeNotFound < StandardError; end
-  class RuntimeNotFound < StandardError; end
   class Command
     module List
       # Find a device

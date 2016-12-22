@@ -11,7 +11,7 @@ module SimCtl
           output = stdout.read
           if result.value.to_i > 0
             output = stderr.read if output.empty?
-            raise StandardError.new(output)
+            raise RuntimeError.new(output)
           end
           return unless block_given?
           if looks_like_json?(output)
