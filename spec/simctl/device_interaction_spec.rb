@@ -72,6 +72,12 @@ RSpec.describe SimCtl, order: :defined do
         expect(File).to exist(@device.path.preferences_plist)
       end
     end
+
+    describe 'setting the device language' do
+      it 'sets the device language' do
+        @device.settings.set_language('de')
+      end
+    end
   end
 
   describe 'finding the device' do
