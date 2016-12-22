@@ -1,3 +1,5 @@
+* Support taking screenshots
+
 # 1.5.7
 
 * Fix SimCtl::Runtime.latest

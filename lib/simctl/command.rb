@@ -3,14 +3,15 @@ require 'simctl/command/create'
 require 'simctl/command/delete'
 require 'simctl/command/erase'
 require 'simctl/command/install'
-require 'simctl/command/uninstall'
+require 'simctl/command/io'
 require 'simctl/command/kill'
 require 'simctl/command/launch'
 require 'simctl/command/list'
+require 'simctl/command/openurl'
 require 'simctl/command/rename'
 require 'simctl/command/reset'
 require 'simctl/command/shutdown'
-require 'simctl/command/openurl'
+require 'simctl/command/uninstall'
 require 'simctl/executor'
 require 'shellwords'
 
@@ -22,15 +23,16 @@ module SimCtl
     include SimCtl::Command::Create
     include SimCtl::Command::Delete
     include SimCtl::Command::Erase
+    include SimCtl::Command::IO
     include SimCtl::Command::Install
-    include SimCtl::Command::Uninstall
     include SimCtl::Command::Kill
     include SimCtl::Command::Launch
     include SimCtl::Command::List
+    include SimCtl::Command::OpenUrl
     include SimCtl::Command::Rename
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
-    include SimCtl::Command::OpenUrl
+    include SimCtl::Command::Uninstall
 
     def device_set_path=(device_set_path)
       @device_set_path = File.expand_path(device_set_path)

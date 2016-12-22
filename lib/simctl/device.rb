@@ -128,6 +128,17 @@ module SimCtl
       @runtime ||= SimCtl.runtime(identifier: plist.runtime)
     end
 
+    # Saves a screenshot to a file
+    #
+    # @param file Path where the screenshot should be saved to
+    # @param opts Optional hash that supports two keys:
+    # * type: Can be png, tiff, bmp, gif, jpeg (default is png)
+    # * display: Can be main or tv for iOS, tv for tvOS and main for watchOS
+    # @return [void]
+    def screenshot!(file, opts={})
+      SimCtl.screenshot(self, file, opts)
+    end
+
     # Returns the settings object
     #
     # @ return [SimCtl::DeviceSettings]

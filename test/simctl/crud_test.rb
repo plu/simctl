@@ -77,6 +77,11 @@ class SimCtl::CRUDTest < Minitest::Test
     device.launch_app!('com.github.plu.simctl.SampleApp')
   end
 
+  should '0835. take screenshot' do
+    device = SimCtl.device(udid: udid)
+    device.screenshot!('/tmp/screenshot.png')
+  end
+
   should '0840. open some url' do
     device = SimCtl.device(udid: udid)
     device.open_url!('https://www.github.com')
