@@ -1,3 +1,5 @@
+* Breaking change: All `!` have been removed from method names
+
 # 1.5.8
 
 * Support taking screenshots

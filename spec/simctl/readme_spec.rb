@@ -12,19 +12,19 @@ RSpec.describe SimCtl do
     device = SimCtl.create_device 'Unit Tests @ iPhone 5 9.3', devicetype, runtime
 
     # Launch a new Simulator.app instance
-    device.launch!
+    device.launch
 
     # Wait for the device to be booted
-    device.wait! {|d| d.state == :booted}
+    device.wait {|d| d.state == :booted}
 
     # Kill the Simulator.app instance again
-    device.shutdown!
-    device.kill!
+    device.shutdown
+    device.kill
 
     # Wait until it did shutdown
-    device.wait! {|d| d.state == :shutdown}
+    device.wait {|d| d.state == :shutdown}
 
     # Delete the device
-    device.delete!
+    device.delete
   end
 end

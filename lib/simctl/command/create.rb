@@ -17,7 +17,7 @@ module SimCtl
         device = Executor.execute(command_for('create', Shellwords.shellescape(name), devicetype.identifier, runtime.identifier)) do |identifier|
           device(udid: identifier)
         end
-        device.wait! {|d| d.state == :shutdown && File.exists?(d.path.device_plist)}
+        device.wait {|d| d.state == :shutdown && File.exists?(d.path.device_plist)}
         device
       end
     end

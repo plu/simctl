@@ -11,7 +11,7 @@ module SimCtl
     # Disables the keyboard helpers
     #
     # @return [void]
-    def disable_keyboard_helpers!
+    def disable_keyboard_helpers
       edit_plist(path.preferences_plist) do |plist|
         %w(
           KeyboardAllowPaddle
@@ -33,7 +33,7 @@ module SimCtl
     #
     # @param enabled value to replace
     # @return [vod]
-    def update_hardware_keyboard!(enabled)
+    def update_hardware_keyboard(enabled)
       edit_plist(path.preferences_plist) do |plist|
         plist['AutomaticMinimizationEnabled'] = enabled
       end

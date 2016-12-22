@@ -12,14 +12,14 @@ module SimCtl
     # Boots the device
     #
     # @return [void]
-    def boot!
+    def boot
       SimCtl.boot_device(self)
     end
 
     # Deletes the device
     #
     # @return [void]
-    def delete!
+    def delete
       SimCtl.delete_device(self)
     end
 
@@ -33,7 +33,7 @@ module SimCtl
     # Erases the device
     #
     # @return [void]
-    def erase!
+    def erase
       SimCtl.erase_device(self)
     end
 
@@ -41,7 +41,7 @@ module SimCtl
     #
     # @param path Absolute path to the app that should be installed
     # @return [void]
-    def install!(path)
+    def install(path)
       SimCtl.install_app(self, path)
     end
 
@@ -49,21 +49,21 @@ module SimCtl
     #
     # @param app_id App identifier of the app that should be uninstalled
     # @return [void]
-    def uninstall!(app_id)
+    def uninstall(app_id)
       SimCtl.uninstall_app(self, app_id)
     end
 
     # Kills the device
     #
     # @return [void]
-    def kill!
+    def kill
       SimCtl.kill_device(self)
     end
 
     # Launches the Simulator
     #
     # @return [void]
-    def launch!(scale=1.0, opts={})
+    def launch(scale=1.0, opts={})
       SimCtl.launch_device(self, scale, opts)
     end
 
@@ -73,7 +73,7 @@ module SimCtl
     # @param identifier [String] the app identifier
     # @param args [Array] optional launch arguments
     # @return [void]
-    def launch_app!(identifier, args=[], opts={})
+    def launch_app(identifier, args=[], opts={})
       SimCtl.launch_app(self, identifier, args, opts)
     end
 
@@ -81,7 +81,7 @@ module SimCtl
     #
     # @param url [String] The url to be opened on the device
     # @return [void]
-    def open_url!(url)
+    def open_url(url)
       SimCtl.open_url(self, url)
     end
 
@@ -92,7 +92,7 @@ module SimCtl
     # Reloads the device information
     #
     # @return [void]
-    def reload!
+    def reload
       device = SimCtl.device(udid: udid)
       device.instance_variables.each do |ivar|
         instance_variable_set(ivar, device.instance_variable_get(ivar))
@@ -102,7 +102,7 @@ module SimCtl
     # Renames the device
     #
     # @return [void]
-    def rename!(name)
+    def rename(name)
       SimCtl.rename_device(self, name)
       @name = name
     end
@@ -110,7 +110,7 @@ module SimCtl
     # Resets the device
     #
     # @return [void]
-    def reset!
+    def reset
       SimCtl.reset_device name, devicetype, runtime
     end
 
@@ -128,7 +128,7 @@ module SimCtl
     # * type: Can be png, tiff, bmp, gif, jpeg (default is png)
     # * display: Can be main or tv for iOS, tv for tvOS and main for watchOS
     # @return [void]
-    def screenshot!(file, opts={})
+    def screenshot(file, opts={})
       SimCtl.screenshot(self, file, opts)
     end
 
@@ -142,7 +142,7 @@ module SimCtl
     # Shuts down the runtime
     #
     # @return [void]
-    def shutdown!
+    def shutdown
       SimCtl.shutdown_device(self)
     end
 
@@ -156,13 +156,13 @@ module SimCtl
     # Reloads the device until the given block returns true
     #
     # @return [void]
-    def wait!(timeout=SimCtl.default_timeout)
+    def wait(timeout=SimCtl.default_timeout)
       Timeout::timeout(timeout) do
         loop do
           break if yield SimCtl.device(udid: udid)
         end
       end
-      reload!
+      reload
     end
 
     def ==(other)

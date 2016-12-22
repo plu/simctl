@@ -7,13 +7,13 @@ RSpec.describe SimCtl, order: :defined do
     @devicetype = SimCtl.devicetype(name: 'iPhone 5')
     @runtime = SimCtl::Runtime.latest(:ios)
     @device = SimCtl.create_device @name, @devicetype, @runtime
-    @device.wait! {|d| d.state == :shutdown}
+    @device.wait {|d| d.state == :shutdown}
   end
 
   after(:all) do
-    with_rescue { @device.kill! }
-    with_rescue { @device.wait! {|d| d.state == :shutdown} }
-    with_rescue { @device.delete! }
+    with_rescue { @device.kill }
+    with_rescue { @device.wait {|d| d.state == :shutdown} }
+    with_rescue { @device.delete }
   end
 
   describe 'creating a device' do
@@ -60,7 +60,7 @@ RSpec.describe SimCtl, order: :defined do
     describe 'update hardware keyboard' do
       it 'creates the preferences plist' do
         File.delete(@device.path.preferences_plist) if File.exists?(@device.path.preferences_plist)
-        @device.settings.update_hardware_keyboard!(false)
+        @device.settings.update_hardware_keyboard(false)
         expect(File).to exist(@device.path.preferences_plist)
       end
     end
@@ -68,7 +68,7 @@ RSpec.describe SimCtl, order: :defined do
     describe 'disable keyboard helpers' do
       it 'creates the preferences plist' do
         File.delete(@device.path.preferences_plist) if File.exists?(@device.path.preferences_plist)
-        @device.settings.disable_keyboard_helpers!
+        @device.settings.disable_keyboard_helpers
         expect(File).to exist(@device.path.preferences_plist)
       end
     end
@@ -106,7 +106,7 @@ RSpec.describe SimCtl, order: :defined do
 
   describe 'renaming the device' do
     it 'renames the device' do
-      @device.rename!('new name')
+      @device.rename('new name')
       expect(@device.name).to be == 'new name'
       expect(SimCtl.device(udid: @device.udid).name).to be == 'new name'
     end
@@ -114,21 +114,21 @@ RSpec.describe SimCtl, order: :defined do
 
   describe 'erasing the device' do
     it 'erases the device' do
-      @device.erase!
+      @device.erase
     end
   end
 
   describe 'launching the device' do
     it 'launches the device' do
-      @device.launch!
-      @device.wait!{|d| d.state == :booted}
+      @device.launch
+      @device.wait {|d| d.state == :booted}
       expect(@device.state).to be == :booted
     end
   end
 
   describe 'launching a system app' do
     it 'launches Safari' do
-      @device.launch_app!('com.apple.mobilesafari')
+      @device.launch_app('com.apple.mobilesafari')
     end
   end
 
@@ -136,12 +136,12 @@ RSpec.describe SimCtl, order: :defined do
     if SimCtl::XcodeVersion.gte? '8.2'
       it 'takes a screenshot' do
         file = File.join(Dir.mktmpdir, 'screenshot.png')
-        @device.screenshot!(file)
+        @device.screenshot(file)
         expect(File).to exist(file)
       end
     else
       it 'raises exception' do
-        expect { @device.screenshot!('/tmp/foo.png') }.to raise_error SimCtl::UnsupportedCommandError
+        expect { @device.screenshot('/tmp/foo.png') }.to raise_error SimCtl::UnsupportedCommandError
       end
     end
   end
@@ -152,25 +152,25 @@ RSpec.describe SimCtl, order: :defined do
     end
 
     it 'installs SampleApp' do
-      @device.install!('spec/SampleApp/build/Release-iphonesimulator/SampleApp.app')
+      @device.install('spec/SampleApp/build/Release-iphonesimulator/SampleApp.app')
     end
   end
 
   describe 'launching an app' do
     it 'launches SampleApp' do
-      @device.launch_app!('com.github.plu.simctl.SampleApp')
+      @device.launch_app('com.github.plu.simctl.SampleApp')
     end
   end
 
   describe 'uninstall an app' do
     it 'uninstalls SampleApp' do
-      @device.uninstall!('com.github.plu.simctl.SampleApp')
+      @device.uninstall('com.github.plu.simctl.SampleApp')
     end
   end
 
   describe 'opening a url' do
     it 'opens some url' do
-      @device.open_url!('https://www.github.com')
+      @device.open_url('https://www.github.com')
     end
   end
 
@@ -180,8 +180,8 @@ RSpec.describe SimCtl, order: :defined do
     end
 
     it 'kills the device' do
-      @device.kill!
-      @device.wait!{|d| d.state == :shutdown}
+      @device.kill
+      @device.wait {|d| d.state == :shutdown}
     end
 
     it 'state is shutdown' do
@@ -195,8 +195,8 @@ RSpec.describe SimCtl, order: :defined do
     end
 
     it 'boots the device' do
-      @device.boot!
-      @device.wait! {|d| d.state == :booted}
+      @device.boot
+      @device.wait {|d| d.state == :booted}
       expect(@device.state).to be == :booted
     end
 
@@ -211,8 +211,8 @@ RSpec.describe SimCtl, order: :defined do
     end
 
     it 'shuts down the device' do
-      @device.shutdown!
-      @device.wait!{|d| d.state == :shutdown}
+      @device.shutdown
+      @device.wait {|d| d.state == :shutdown}
     end
 
     it 'state is shutdown' do
@@ -222,7 +222,7 @@ RSpec.describe SimCtl, order: :defined do
 
   describe 'resetting the device' do
     it 'deletes the old device and creates a new one' do
-      new_device = @device.reset!
+      new_device = @device.reset
       expect(new_device.name).to be == @device.name
       expect(new_device.devicetype).to be == @device.devicetype
       expect(new_device.runtime).to be == @device.runtime
@@ -235,7 +235,7 @@ RSpec.describe SimCtl, order: :defined do
   describe 'deleting the device' do
     it 'deletes the device' do
       device = SimCtl.create_device @name, @devicetype, @runtime
-      device.delete!
+      device.delete
       expect(SimCtl.device(udid: @device.udid)).to be_nil
     end
   end
