@@ -171,6 +171,16 @@ module SimCtl
       other.udid == udid
     end
 
+    def method_missing(method_name, *args, &block)
+      if method_name[-1] == '!'
+        new_method_name = method_name.to_s.chop.to_sym
+        if respond_to?(new_method_name)
+          return send(new_method_name, &block)
+        end
+      end
+      super
+    end
+
     private
 
     def plist
