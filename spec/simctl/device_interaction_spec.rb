@@ -133,7 +133,7 @@ RSpec.describe SimCtl, order: :defined do
   end
 
   describe 'taking a screenshot' do
-    if SimCtl::XcodeVersion.gte? '8.2'
+    if SimCtl::Xcode::Version.gte? '8.2'
       it 'takes a screenshot' do
         file = File.join(Dir.mktmpdir, 'screenshot.png')
         @device.screenshot(file)

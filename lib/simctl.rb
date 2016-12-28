@@ -3,7 +3,7 @@ require 'simctl/device'
 require 'simctl/device_type'
 require 'simctl/list'
 require 'simctl/runtime'
-require 'simctl/xcode_version'
+require 'simctl/xcode/version'
 
 module SimCtl
   class UnsupportedCommandError < StandardError; end

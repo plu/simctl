@@ -77,13 +77,13 @@ RSpec.describe SimCtl do
     end
 
     it 'finds the latest runtime' do
-      if SimCtl::XcodeVersion.gte?('8.2')
+      if SimCtl::Xcode::Version.gte?('8.2')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '10.2'
-      elsif SimCtl::XcodeVersion.gte?('8.1')
+      elsif SimCtl::Xcode::Version.gte?('8.1')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '10.1'
-      elsif SimCtl::XcodeVersion.gte?('8.0')
+      elsif SimCtl::Xcode::Version.gte?('8.0')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '10.0'
-      elsif SimCtl::XcodeVersion.gte?('7.3')
+      elsif SimCtl::Xcode::Version.gte?('7.3')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '9.3'
       end
     end
