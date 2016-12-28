@@ -175,6 +175,7 @@ module SimCtl
       if method_name[-1] == '!'
         new_method_name = method_name.to_s.chop.to_sym
         if respond_to?(new_method_name)
+          warn "[#{Kernel.caller.first}] `#{method_name}` is deprecated. Please use `#{new_method_name}` instead."
           return send(new_method_name, &block)
         end
       end
