@@ -1,5 +1,6 @@
 require 'cfpropertylist'
 require 'ostruct'
+require 'simctl/device_launchctl'
 require 'simctl/device_path'
 require 'simctl/device_settings'
 require 'simctl/object'
@@ -72,6 +73,13 @@ module SimCtl
     # @return [void]
     def launch(scale=1.0, opts={})
       SimCtl.launch_device(self, scale, opts)
+    end
+
+    # Returns the launchctl object
+    #
+    # @ return [SimCtl::DeviceLaunchctl]
+    def launchctl
+      @launchctl ||= DeviceLaunchctl.new(self)
     end
 
     # Launches an app in the given device
