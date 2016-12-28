@@ -3,7 +3,11 @@ require 'simctl/object'
 
 module SimCtl
   class Runtime < Object
-    attr_reader :availability, :buildversion, :identifier, :name, :version
+    attr_reader :availability, :buildversion, :identifier, :name, :type, :version
+
+    def type
+      @type ||= name.split("\s").first.downcase.to_sym
+    end
 
     def ==(other)
       return false if other.nil?
