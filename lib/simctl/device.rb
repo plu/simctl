@@ -86,7 +86,7 @@ module SimCtl
     end
 
     def path
-      @path ||= DevicePath.new(udid)
+      @path ||= DevicePath.new(self)
     end
 
     # Reloads the device information
