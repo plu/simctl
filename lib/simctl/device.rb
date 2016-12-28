@@ -226,13 +226,22 @@ module SimCtl
     end
 
     def required_services_for_ready
-      [
-        'com.apple.backboardd',
-        'com.apple.medialibraryd',
-        'com.apple.mobile.installd',
-        'com.apple.SimulatorBridge',
-        'com.apple.SpringBoard',
-      ]
+      if Xcode::Version.gte? '8.0'
+        [
+          'com.apple.SimulatorBridge',
+          'com.apple.SpringBoard',
+          'com.apple.backboardd',
+          'com.apple.medialibraryd',
+          'com.apple.mobile.installd',
+        ]
+      else
+        [
+          'com.apple.SimulatorBridge',
+          'com.apple.SpringBoard',
+          'com.apple.backboardd',
+          'com.apple.mobile.installd',
+        ]
+      end
     end
   end
 end
