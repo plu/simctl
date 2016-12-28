@@ -141,7 +141,6 @@ RSpec.describe SimCtl, order: :defined do
       @device.launch
       @device.wait {|d| d.state == :booted}
       expect(@device.state).to be == :booted
-      expect(@device).not_to be_ready
     end
 
     it 'will be ready at some point' do
@@ -229,7 +228,6 @@ RSpec.describe SimCtl, order: :defined do
       @device.boot
       @device.wait {|d| d.state == :booted}
       expect(@device.state).to be == :booted
-      expect(@device).not_to be_ready
     end
 
     it 'state is booted' do

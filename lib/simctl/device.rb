@@ -114,6 +114,7 @@ module SimCtl
     def ready?
       # TODO: Should look for different services depending on device type (iphone/ipad, tv, watch)
       running_services = launchctl.list.reject {|service| service.pid.to_i == 0 }.map {|service| service.name}
+      $stderr.puts (required_services_for_ready - running_services)
       (required_services_for_ready - running_services).empty?
     end
 
@@ -252,7 +253,6 @@ module SimCtl
           [
             'com.apple.SimulatorBridge',
             'com.apple.SpringBoard',
-            'com.apple.backboardd',
             'com.apple.mobile.installd',
           ]
         end
