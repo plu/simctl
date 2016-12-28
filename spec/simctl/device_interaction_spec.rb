@@ -143,7 +143,7 @@ RSpec.describe SimCtl, order: :defined do
       expect(@device.state).to be == :booted
     end
 
-    it 'will be ready at some point' do
+    it 'is ready' do
       @device.wait {|d| d.ready?}
       expect(@device).to be_ready
     end
@@ -234,7 +234,7 @@ RSpec.describe SimCtl, order: :defined do
       expect(@device.state).to be == :booted
     end
 
-    it 'will be ready at some point' do
+    it 'is ready' do
       @device.wait {|d| d.ready?}
       expect(@device).to be_ready
     end
