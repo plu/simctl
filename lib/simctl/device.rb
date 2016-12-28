@@ -9,6 +9,13 @@ module SimCtl
   class Device < Object
     attr_reader :availability, :name, :os, :state, :udid
 
+    # Returns true/false if the device is available
+    #
+    # @return [Bool]
+    def available?
+      availability !~ /unavailable/i
+    end
+
     # Boots the device
     #
     # @return [void]
