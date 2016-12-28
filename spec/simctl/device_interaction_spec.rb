@@ -54,6 +54,24 @@ RSpec.describe SimCtl, order: :defined do
     it 'state is shutdown' do
       expect(@device.state).to be == :shutdown
     end
+
+    describe '#path' do
+      it 'has a device plist' do
+        expect(File).to exist(@device.path.device_plist)
+      end
+
+      it 'has a global preferences plist' do
+        expect(File).to exist(@device.path.global_preferences_plist)
+      end
+
+      it 'has a home' do
+        expect(File).to exist(@device.path.home)
+      end
+
+      it 'has a launchctl' do
+        expect(File).to exist(@device.path.launchctl)
+      end
+    end
   end
 
   describe 'device settings' do
