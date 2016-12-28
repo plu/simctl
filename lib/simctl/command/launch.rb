@@ -3,7 +3,6 @@ require 'shellwords'
 module SimCtl
   class Command
     module Launch
-      LAUNCH_APP_COMMAND = 'xcrun simctl launch'
       SUPPORTED_SCALE = [1.0, 0.75, 0.5, 0.25]
       XCODE_HOME = `xcode-select -p`.chomp
 
