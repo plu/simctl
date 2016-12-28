@@ -226,21 +226,38 @@ module SimCtl
     end
 
     def required_services_for_ready
-      if Xcode::Version.gte? '8.0'
-        [
-          'com.apple.SimulatorBridge',
-          'com.apple.SpringBoard',
-          'com.apple.backboardd',
-          'com.apple.medialibraryd',
-          'com.apple.mobile.installd',
-        ]
+      case runtime.type
+      when :tvos, :watchos
+        if Xcode::Version.gte? '8.0'
+          [
+            'com.apple.mobileassetd',
+            'com.apple.nsurlsessiond',
+          ]
+        else
+          [
+            'com.apple.mobileassetd',
+            'com.apple.networkd',
+          ]
+        end
+      when :ios
+        if Xcode::Version.gte? '8.0'
+          [
+            'com.apple.SimulatorBridge',
+            'com.apple.SpringBoard',
+            'com.apple.backboardd',
+            'com.apple.medialibraryd',
+            'com.apple.mobile.installd',
+          ]
+        else
+          [
+            'com.apple.SimulatorBridge',
+            'com.apple.SpringBoard',
+            'com.apple.backboardd',
+            'com.apple.mobile.installd',
+          ]
+        end
       else
-        [
-          'com.apple.SimulatorBridge',
-          'com.apple.SpringBoard',
-          'com.apple.backboardd',
-          'com.apple.mobile.installd',
-        ]
+        []
       end
     end
   end
