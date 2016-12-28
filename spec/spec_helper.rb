@@ -10,6 +10,8 @@ require File.dirname(__FILE__) + '/../lib/simctl.rb'
 
 if ENV['TRAVIS']
   SimCtl.default_timeout = 300
+else
+  SimCtl.default_timeout = 60
 end
 
 unless ENV['CUSTOM_DEVICE_SET_PATH'] == 'false'

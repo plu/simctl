@@ -104,6 +104,19 @@ module SimCtl
       @path ||= DevicePath.new(self)
     end
 
+		# Returns true/false if the device is ready
+    # Uses [SimCtl::DeviceLaunchctl] to look for certain services being running.
+    #
+    # Unfortunately the 'booted' state does not mean the Simulator is ready for
+    # installing or launching applications.
+		#
+    # @return [Bool]
+    def ready?
+      # TODO: Should look for different services depending on device type (iphone/ipad, tv, watch)
+      running_services = launchctl.list.reject {|service| service.pid.to_i == 0 }.map {|service| service.name}
+      (required_services_for_ready - running_services).empty?
+    end
+
     # Reloads the device information
     #
     # @return [void]
@@ -212,5 +225,14 @@ module SimCtl
       @plist ||= OpenStruct.new(CFPropertyList.native_types(CFPropertyList::List.new(file: path.device_plist).value))
     end
 
+    def required_services_for_ready
+      [
+        'com.apple.backboardd',
+        'com.apple.medialibraryd',
+        'com.apple.mobile.installd',
+        'com.apple.SimulatorBridge',
+        'com.apple.SpringBoard',
+      ]
+    end
   end
 end

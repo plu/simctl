@@ -7,7 +7,7 @@ module SimCtl
     end
 
     def list
-      fields = [:pid, :status, :service]
+      fields = [:pid, :status, :name]
       device
         .spawn(device.path.launchctl, ['list'])
         .split("\n")
