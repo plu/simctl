@@ -1,4 +1,5 @@
 * Breaking change: All `!` have been removed from method names
+* Support spawning processes
 
 # 1.5.8
 

@@ -164,6 +164,13 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
+  describe 'spawning a process' do
+    it 'spawns launchctl list' do
+      output = @device.spawn(@device.path.launchctl, ['list'])
+      expect(output.length).to be > 0
+    end
+  end
+
   describe 'installing an app' do
     before(:all) do
       system 'cd spec/SampleApp && xcodebuild -sdk iphonesimulator >/dev/null 2>&1'

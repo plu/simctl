@@ -11,6 +11,7 @@ require 'simctl/command/openurl'
 require 'simctl/command/rename'
 require 'simctl/command/reset'
 require 'simctl/command/shutdown'
+require 'simctl/command/spawn'
 require 'simctl/command/uninstall'
 require 'simctl/executor'
 require 'shellwords'
@@ -32,6 +33,7 @@ module SimCtl
     include SimCtl::Command::Rename
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
+    include SimCtl::Command::Spawn
     include SimCtl::Command::Uninstall
 
     def device_set_path=(device_set_path)

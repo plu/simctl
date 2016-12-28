@@ -153,6 +153,15 @@ module SimCtl
       SimCtl.shutdown_device(self)
     end
 
+    # Spawn a process on a device
+    #
+    # @param path [String] path to executable
+    # @param args [Array] arguments for the executable
+    # @return [void]
+    def spawn(path, args=[], opts={})
+      SimCtl.spawn(self, path, args, opts)
+    end
+
     # Returns the state of the device
     #
     # @return [sym]
