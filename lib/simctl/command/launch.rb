@@ -4,7 +4,6 @@ module SimCtl
   class Command
     module Launch
       SUPPORTED_SCALE = [1.0, 0.75, 0.5, 0.25]
-      XCODE_HOME = `xcode-select -p`.chomp
 
       # Launches a Simulator instance with the given device
       #
@@ -22,7 +21,7 @@ module SimCtl
         }
         args.merge!({ '-DeviceSetPath' => Shellwords.shellescape(SimCtl.device_set_path) }) unless SimCtl.device_set_path.nil?
         args = args.merge(opts).zip.flatten.join(' ')
-        command = "open -Fgn #{XCODE_HOME}/Applications/Simulator.app --args #{args}"
+        command = "open -Fgn #{Xcode::Path.home}/Applications/Simulator.app --args #{args}"
         system command
       end
 

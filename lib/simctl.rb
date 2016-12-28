@@ -3,6 +3,7 @@ require 'simctl/device'
 require 'simctl/device_type'
 require 'simctl/list'
 require 'simctl/runtime'
+require 'simctl/xcode/path'
 require 'simctl/xcode/version'
 
 module SimCtl
