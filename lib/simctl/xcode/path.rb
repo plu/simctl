@@ -7,6 +7,10 @@ module SimCtl
         def home
           HOME
         end
+
+        def sdk_root
+          File.join(HOME, 'Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk')
+        end
       end
     end
   end
