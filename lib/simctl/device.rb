@@ -104,12 +104,12 @@ module SimCtl
       @path ||= DevicePath.new(self)
     end
 
-		# Returns true/false if the device is ready
+    # Returns true/false if the device is ready
     # Uses [SimCtl::DeviceLaunchctl] to look for certain services being running.
     #
     # Unfortunately the 'booted' state does not mean the Simulator is ready for
     # installing or launching applications.
-		#
+    #
     # @return [Bool]
     def ready?
       # TODO: Should look for different services depending on device type (iphone/ipad, tv, watch)
