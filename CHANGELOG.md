@@ -1,3 +1,5 @@
+# 1.6.1
+
 * Add `SimCtl.warmup`
 
 # 1.6.0
