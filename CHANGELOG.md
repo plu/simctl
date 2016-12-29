@@ -1,3 +1,5 @@
+# 1.6.0
+
 * Breaking change: All `!` have been removed from method names
 * Support spawning processes
 * Add `device.ready?` method
