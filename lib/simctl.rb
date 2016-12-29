@@ -10,6 +10,7 @@ module SimCtl
   class UnsupportedCommandError < StandardError; end
   class DeviceTypeNotFound < StandardError; end
   class RuntimeNotFound < StandardError; end
+  class DeviceNotFound < StandardError; end
 
   @@default_timeout = 15
 

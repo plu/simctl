@@ -1,3 +1,5 @@
+* Add `SimCtl.warmup`
+
 # 1.6.0
 
 * Breaking change: All `!` have been removed from method names
