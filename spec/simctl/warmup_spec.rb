@@ -14,7 +14,7 @@ RSpec.describe SimCtl do
       end
     else
       it 'raises exception' do
-        expect { SimCtl.warmup('iPhone 6', 'iOS 10.1') }.to raise_error SimCtl::DeviceNotFound
+        expect { SimCtl.warmup('iPhone 6', 'iOS 9.3') }.to raise_error SimCtl::DeviceNotFound
       end
     end
   end
