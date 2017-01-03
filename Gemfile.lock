@@ -19,7 +19,7 @@ GEM
     docile (1.1.5)
     json (2.0.2)
     naturally (2.1.0)
-    rake (10.4.2)
+    rake (12.0.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
