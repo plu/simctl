@@ -193,8 +193,14 @@ RSpec.describe SimCtl, order: :defined do
   end
 
   describe 'terminating an app' do
-    it 'terminates SampleApp' do
-      @device.terminate_app('com.github.plu.simctl.SampleApp')
+    if SimCtl::Xcode::Version.gte? '8.2'
+      it 'terminates SampleApp' do
+        @device.terminate_app('com.github.plu.simctl.SampleApp')
+      end
+    else
+      it 'raises exception' do
+        expect { @device.terminate_app('com.github.plu.simctl.SampleApp') }.to raise_error SimCtl::UnsupportedCommandError
+      end
     end
   end
 
