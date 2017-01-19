@@ -15,6 +15,12 @@ module SimCtl
       other.identifier == identifier
     end
 
+    def gte?(other_version)
+      return false if other_version.nil?
+      return false unless other_version.kind_of? String
+      Gem::Version.new(version) >= Gem::Version.new(other_version)
+    end
+
     # Returns the latest available runtime
     #
     # @param name [String] type (ios, watchos, tvos)

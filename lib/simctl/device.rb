@@ -249,7 +249,7 @@ module SimCtl
           ]
         end
       when :ios
-        if Xcode::Version.gte? '8.0'
+        if runtime.gte? '9.0'
           [
             'com.apple.SimulatorBridge',
             'com.apple.SpringBoard',
@@ -261,6 +261,7 @@ module SimCtl
           [
             'com.apple.SimulatorBridge',
             'com.apple.SpringBoard',
+            'com.apple.backboardd',
             'com.apple.mobile.installd',
           ]
         end
