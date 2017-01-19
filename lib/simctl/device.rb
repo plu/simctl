@@ -92,6 +92,15 @@ module SimCtl
       SimCtl.launch_app(self, identifier, args, opts)
     end
 
+    # Terminates an app on the given device
+    #
+    # @param identifier [String] the app identifier
+    # @param args [Array] optional terminate arguments
+    # @return [void]
+    def terminate_app(identifier, args=[])
+      SimCtl.terminate_app(self, identifier, args)
+    end
+
     # Opens the url on the device
     #
     # @param url [String] The url to be opened on the device

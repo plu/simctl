@@ -192,6 +192,12 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
+  describe 'terminating an app' do
+    it 'terminates SampleApp' do
+      @device.terminate_app('com.github.plu.simctl.SampleApp')
+    end
+  end
+
   describe 'uninstall an app' do
     it 'uninstalls SampleApp' do
       @device.uninstall('com.github.plu.simctl.SampleApp')
