@@ -75,6 +75,13 @@ module SimCtl
       SimCtl.launch_device(self, scale, opts)
     end
 
+    # Launches the Simulator in a headless state
+    #
+    # @return [void]
+    def launch_headless
+      SimCtl.launch_device_headless(self)
+    end
+
     # Returns the launchctl object
     #
     # @ return [SimCtl::DeviceLaunchctl]
