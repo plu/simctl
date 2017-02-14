@@ -267,6 +267,28 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
+  describe 'launching and killing headless device' do
+    it 'launches the device' do
+      @device.launch_headless
+      @device.wait {|d| d.state == :booted}
+      expect(@device.state).to be == :booted
+    end
+
+    it 'is ready' do
+      @device.wait {|d| d.ready?}
+      expect(@device).to be_ready
+    end
+
+    it 'kills the device' do
+      @device.kill
+      @device.wait {|d| d.state == :shutdown}
+    end
+
+    it 'state is shutdown' do
+      expect(@device.state).to be == :shutdown
+    end
+  end
+
   describe 'resetting the device' do
     it 'deletes the old device and creates a new one' do
       new_device = @device.reset
