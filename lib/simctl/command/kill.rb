@@ -10,7 +10,12 @@ module SimCtl
         if pid.to_i > 0
           system 'kill', pid
         else
-          false
+          pid = `ps xww | grep launchd_sim | grep -s #{device.udid} | grep -v grep | awk '{print $1}'`.chomp
+          if pid.to_i > 0
+            system 'kill', pid
+          else
+            false
+          end
         end
       end
     end

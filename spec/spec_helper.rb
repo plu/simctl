@@ -31,7 +31,7 @@ RSpec.configure do |config|
 
   def with_rescue(&block)
     begin
-      block.class
+      block.call
     rescue
     end
   end

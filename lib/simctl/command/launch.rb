@@ -25,6 +25,17 @@ module SimCtl
         system command
       end
 
+      # Launches a Simulator instance with the given device in a headless state
+      #
+      # @param device [SimCtl::Device] the device to launch
+      # @return [void]
+      def launch_device_headless(device)
+        # Launching the same device twice does not work.
+        # Simulator.app would just hang. Solution: Kill first.
+        kill_device(device)
+        Executor.execute(command_for('boot', device.udid))
+      end
+
       # Launches an app in the given device
       #
       # @param device [SimCtl::Device] the device to launch
