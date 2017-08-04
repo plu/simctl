@@ -17,7 +17,11 @@ module SimCtl
     end
 
     def launchctl
-      @launchctl ||= File.join(runtime_root, 'bin/launchctl')
+      @launchctl ||= if Xcode::Version.gte? '9.0'
+                       "#{Xcode::Path.home}//Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/bin/launchctl"
+                     else
+                        File.join(runtime_root, 'bin/launchctl')
+                     end
     end
 
     def preferences_plist
