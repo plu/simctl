@@ -121,7 +121,6 @@ module SimCtl
     #
     # @return [Bool]
     def ready?
-      # TODO: Should look for different services depending on device type (iphone/ipad, tv, watch)
       running_services = launchctl.list.reject {|service| service.pid.to_i == 0 }.map {|service| service.name}
       (required_services_for_ready - running_services).empty?
     end
@@ -249,12 +248,18 @@ module SimCtl
           ]
         end
       when :ios
-        if Xcode::Version.gte? '8.0'
+        if Xcode::Version.gte? '9.0'
+          [
+            'com.apple.backboardd',
+            'com.apple.mobile.installd',
+            'com.apple.CoreSimulator.bridge',
+            'com.apple.SpringBoard',
+          ]
+        elsif Xcode::Version.gte? '8.0'
           [
             'com.apple.SimulatorBridge',
             'com.apple.SpringBoard',
             'com.apple.backboardd',
-            'com.apple.medialibraryd',
             'com.apple.mobile.installd',
           ]
         else
