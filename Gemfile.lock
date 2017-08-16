@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    simctl (1.6.1)
+    simctl (1.6.2)
       CFPropertyList
       naturally
 
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.4)
+    CFPropertyList (2.3.5)
     coveralls (0.8.17)
       json (>= 1.8, < 3)
       simplecov (~> 0.12.0)
@@ -53,4 +53,4 @@ DEPENDENCIES
   simctl!
 
 BUNDLED WITH
-   1.13.7
+   1.15.1
