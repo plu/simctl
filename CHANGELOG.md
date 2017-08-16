@@ -1,3 +1,7 @@
+# 1.6.2
+
+* Support Xcode 9
+
 # 1.6.1
 
 * Add `SimCtl.warmup`
