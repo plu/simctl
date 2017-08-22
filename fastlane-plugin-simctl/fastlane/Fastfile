@@ -1,0 +1,9 @@
+lane :test do
+  simctl(block: lambda { |device|
+    scan(workspace: "#{Dir.pwd}/AwesomeApp.xcworkspace",
+         scheme: 'AwesomeApp',
+         device: device.name,
+         derived_data_path: derived_data_path)
+  })
+  trainer(output_directory: ".")
+end
