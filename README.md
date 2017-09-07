@@ -12,11 +12,11 @@ require 'simctl'
 # Select the iOS 9.3 runtime
 runtime = SimCtl.runtime(name: 'iOS 9.3')
 
-# Select the iPhone 5 device type
-devicetype = SimCtl.devicetype(name: 'iPhone 5')
+# Select the iPhone 6 device type
+devicetype = SimCtl.devicetype(name: 'iPhone 6')
 
 # Create a new device
-device = SimCtl.create_device 'Unit Tests @ iPhone 5 9.3', devicetype, runtime
+device = SimCtl.create_device 'Unit Tests @ iPhone 6 9.3', devicetype, runtime
 
 # Launch a new Simulator.app instance
 device.launch

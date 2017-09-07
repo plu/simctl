@@ -14,9 +14,7 @@ else
   SimCtl.default_timeout = 60
 end
 
-unless ENV['CUSTOM_DEVICE_SET_PATH'] == 'false'
-  SimCtl.device_set_path = Dir.mktmpdir 'foo bar'
-end
+SimCtl.device_set_path = Dir.mktmpdir 'foo bar' if ENV['CUSTOM_DEVICE_SET_PATH']
 
 RSpec.configure do |config|
   config.tty = true
