@@ -8,7 +8,7 @@ RSpec.describe SimCtl do
       end
 
       it 'warms up and returns a device for given objects' do
-        devicetype = SimCtl.devicetype(name: 'iPhone 5')
+        devicetype = SimCtl.devicetype(name: 'iPhone 6')
         runtime = SimCtl::Runtime.latest(:ios)
         expect(SimCtl.warmup(devicetype, runtime)).to be_kind_of SimCtl::Device
       end

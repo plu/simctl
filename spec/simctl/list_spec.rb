@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe SimCtl do
   describe '#devicetype' do
     it 'find device type by name' do
-      expect(SimCtl.devicetype(name: 'iPhone 5')).to be_kind_of SimCtl::DeviceType
+      expect(SimCtl.devicetype(name: 'iPhone 6')).to be_kind_of SimCtl::DeviceType
     end
 
     it 'raise exception if device type is not found' do
@@ -77,7 +77,11 @@ RSpec.describe SimCtl do
     end
 
     it 'finds the latest runtime' do
-      if SimCtl::Xcode::Version.gte?('8.2')
+      if SimCtl::Xcode::Version.gte?('9.0')
+        expect(SimCtl::Runtime.latest(:ios).version).to be == '11.0'
+      elsif SimCtl::Xcode::Version.gte?('8.3')
+        expect(SimCtl::Runtime.latest(:ios).version).to be == '10.3.1'
+      elsif SimCtl::Xcode::Version.gte?('8.2')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '10.2'
       elsif SimCtl::Xcode::Version.gte?('8.1')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '10.1'
