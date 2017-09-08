@@ -7,12 +7,12 @@ RSpec.describe SimCtl, order: :defined do
     @devicetype = SimCtl.devicetype(name: 'iPhone 6')
     @runtime = SimCtl::Runtime.latest(:ios)
     @device = SimCtl.create_device @name, @devicetype, @runtime
-    @device.wait {|d| d.state == :shutdown}
+    @device.wait { |d| d.state == :shutdown }
   end
 
   after(:all) do
     with_rescue { @device.kill }
-    with_rescue { @device.wait {|d| d.state == :shutdown} }
+    with_rescue { @device.wait { |d| d.state == :shutdown } }
     with_rescue { @device.delete }
   end
 
@@ -77,7 +77,7 @@ RSpec.describe SimCtl, order: :defined do
   describe 'device settings' do
     describe 'update hardware keyboard' do
       it 'creates the preferences plist' do
-        File.delete(@device.path.preferences_plist) if File.exists?(@device.path.preferences_plist)
+        File.delete(@device.path.preferences_plist) if File.exist?(@device.path.preferences_plist)
         @device.settings.update_hardware_keyboard(false)
         expect(File).to exist(@device.path.preferences_plist)
       end
@@ -85,7 +85,7 @@ RSpec.describe SimCtl, order: :defined do
 
     describe 'disable keyboard helpers' do
       it 'creates the preferences plist' do
-        File.delete(@device.path.preferences_plist) if File.exists?(@device.path.preferences_plist)
+        File.delete(@device.path.preferences_plist) if File.exist?(@device.path.preferences_plist)
         @device.settings.disable_keyboard_helpers
         expect(File).to exist(@device.path.preferences_plist)
       end
@@ -139,12 +139,12 @@ RSpec.describe SimCtl, order: :defined do
   describe 'launching the device' do
     it 'launches the device' do
       @device.launch
-      @device.wait {|d| d.state == :booted}
+      @device.wait { |d| d.state == :booted }
       expect(@device.state).to be == :booted
     end
 
     it 'is ready' do
-      @device.wait {|d| d.ready?}
+      @device.wait(&:ready?)
       expect(@device).to be_ready
     end
   end
@@ -223,7 +223,7 @@ RSpec.describe SimCtl, order: :defined do
 
     it 'kills the device' do
       @device.kill
-      @device.wait {|d| d.state == :shutdown}
+      @device.wait { |d| d.state == :shutdown }
     end
 
     it 'state is shutdown' do
@@ -238,7 +238,7 @@ RSpec.describe SimCtl, order: :defined do
 
     it 'boots the device' do
       @device.boot
-      @device.wait {|d| d.state == :booted}
+      @device.wait { |d| d.state == :booted }
       expect(@device.state).to be == :booted
     end
 
@@ -247,7 +247,7 @@ RSpec.describe SimCtl, order: :defined do
     end
 
     it 'is ready' do
-      @device.wait {|d| d.ready?}
+      @device.wait(&:ready?)
       expect(@device).to be_ready
     end
   end
@@ -259,7 +259,7 @@ RSpec.describe SimCtl, order: :defined do
 
     it 'shuts down the device' do
       @device.shutdown
-      @device.wait {|d| d.state == :shutdown}
+      @device.wait { |d| d.state == :shutdown }
     end
 
     it 'state is shutdown' do

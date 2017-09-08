@@ -15,14 +15,14 @@ RSpec.describe SimCtl do
     device.launch
 
     # Wait for the device to be booted
-    device.wait {|d| d.state == :booted}
+    device.wait { |d| d.state == :booted }
 
     # Kill the Simulator.app instance again
     device.shutdown
     device.kill
 
     # Wait until it did shutdown
-    device.wait {|d| d.state == :shutdown}
+    device.wait { |d| d.state == :shutdown }
 
     # Delete the device
     device.delete

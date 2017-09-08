@@ -7,11 +7,11 @@ module SimCtl
       def execute(command)
         command = command.flatten.join(' ')
         $stderr.puts command if ENV['SIMCTL_DEBUG']
-        Open3.popen3(command) do |stdin, stdout, stderr, result|
+        Open3.popen3(command) do |_stdin, stdout, stderr, result|
           output = stdout.read
           if result.value.to_i > 0
             output = stderr.read if output.empty?
-            raise RuntimeError.new(output)
+            raise output
           end
           return unless block_given?
           if looks_like_json?(output)
@@ -25,7 +25,7 @@ module SimCtl
       private
 
       def looks_like_json?(output)
-        output.start_with?('[') || output.start_with?('{')
+        output.start_with?('[', '{')
       end
     end
   end

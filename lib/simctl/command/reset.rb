@@ -13,14 +13,14 @@ module SimCtl
           list_devices.where(name: name, os: runtime.name).each do |device|
             device.kill
             device.shutdown if device.state != :shutdown
-            device.wait {|d| d.state == :shutdown}
+            device.wait { |d| d.state == :shutdown }
             device.delete
           end
         rescue Exception => exception
           yield exception if block_given?
         end
         device = create_device name, device_type, runtime
-        device.wait {|d| d.state == :shutdown}
+        device.wait { |d| d.state == :shutdown }
         device
       end
     end

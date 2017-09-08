@@ -13,7 +13,7 @@ module SimCtl
     # @return [void]
     def disable_keyboard_helpers
       edit_plist(path.preferences_plist) do |plist|
-        %w(
+        %w[
           KeyboardAllowPaddle
           KeyboardAssistant
           KeyboardAutocapitalization
@@ -23,7 +23,7 @@ module SimCtl
           KeyboardPeriodShortcut
           KeyboardPrediction
           KeyboardShowPredictionBar
-        ).each do |key|
+        ].each do |key|
           plist[key] = false
         end
       end
@@ -39,8 +39,8 @@ module SimCtl
       end
     end
 
-    def edit_plist(path, &block)
-      plist = File.exists?(path) ? CFPropertyList::List.new(file: path) : CFPropertyList::List.new
+    def edit_plist(path)
+      plist = File.exist?(path) ? CFPropertyList::List.new(file: path) : CFPropertyList::List.new
       content = CFPropertyList.native_types(plist.value) || {}
       yield content
       plist.value = CFPropertyList.guess(content)
@@ -53,7 +53,7 @@ module SimCtl
     def set_language(language)
       edit_plist(path.global_preferences_plist) do |plist|
         key = 'AppleLanguages'
-        plist[key] = [] unless plist.has_key?(key)
+        plist[key] = [] unless plist.key?(key)
         plist[key].unshift(language).uniq!
       end
     end

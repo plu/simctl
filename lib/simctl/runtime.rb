@@ -11,7 +11,7 @@ module SimCtl
 
     def ==(other)
       return false if other.nil?
-      return false unless other.kind_of? Runtime
+      return false unless other.is_a? Runtime
       other.identifier == identifier
     end
 
@@ -20,7 +20,7 @@ module SimCtl
     # @param name [String] type (ios, watchos, tvos)
     # @return [SimCtl::Runtime] the latest available runtime
     def self.latest(type)
-      Naturally.sort_by(SimCtl.list_runtimes.where(name: %r|#{type}|i), :version).last
+      Naturally.sort_by(SimCtl.list_runtimes.where(name: /#{type}/i), :version).last
     end
   end
 end

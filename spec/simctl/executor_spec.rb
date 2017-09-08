@@ -10,7 +10,7 @@ RSpec.describe SimCtl::Executor do
       json = SimCtl::Executor.execute(["echo '{\"foo\":\"bar\"}'"]) do |result|
         result
       end
-      expect(json).to eql({'foo' => 'bar'})
+      expect(json).to eql('foo' => 'bar')
     end
 
     it 'returns a string' do

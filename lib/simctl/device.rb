@@ -71,7 +71,7 @@ module SimCtl
     # Launches the Simulator
     #
     # @return [void]
-    def launch(scale=1.0, opts={})
+    def launch(scale = 1.0, opts = {})
       SimCtl.launch_device(self, scale, opts)
     end
 
@@ -88,7 +88,7 @@ module SimCtl
     # @param identifier [String] the app identifier
     # @param args [Array] optional launch arguments
     # @return [void]
-    def launch_app(identifier, args=[], opts={})
+    def launch_app(identifier, args = [], opts = {})
       SimCtl.launch_app(self, identifier, args, opts)
     end
 
@@ -97,7 +97,7 @@ module SimCtl
     # @param identifier [String] the app identifier
     # @param args [Array] optional terminate arguments
     # @return [void]
-    def terminate_app(identifier, args=[])
+    def terminate_app(identifier, args = [])
       SimCtl.terminate_app(self, identifier, args)
     end
 
@@ -121,7 +121,7 @@ module SimCtl
     #
     # @return [Bool]
     def ready?
-      running_services = launchctl.list.reject {|service| service.pid.to_i == 0 }.map {|service| service.name}
+      running_services = launchctl.list.reject { |service| service.pid.to_i == 0 }.map(&:name)
       (required_services_for_ready - running_services).empty?
     end
 
@@ -164,7 +164,7 @@ module SimCtl
     # * type: Can be png, tiff, bmp, gif, jpeg (default is png)
     # * display: Can be main or tv for iOS, tv for tvOS and main for watchOS
     # @return [void]
-    def screenshot(file, opts={})
+    def screenshot(file, opts = {})
       SimCtl.screenshot(self, file, opts)
     end
 
@@ -187,7 +187,7 @@ module SimCtl
     # @param path [String] path to executable
     # @param args [Array] arguments for the executable
     # @return [void]
-    def spawn(path, args=[], opts={})
+    def spawn(path, args = [], opts = {})
       SimCtl.spawn(self, path, args, opts)
     end
 
@@ -201,8 +201,8 @@ module SimCtl
     # Reloads the device until the given block returns true
     #
     # @return [void]
-    def wait(timeout=SimCtl.default_timeout)
-      Timeout::timeout(timeout) do
+    def wait(timeout = SimCtl.default_timeout)
+      Timeout.timeout(timeout) do
         loop do
           break if yield SimCtl.device(udid: udid)
         end
@@ -212,7 +212,7 @@ module SimCtl
 
     def ==(other)
       return false if other.nil?
-      return false unless other.kind_of? Device
+      return false unless other.is_a? Device
       other.udid == udid
     end
 
@@ -239,12 +239,12 @@ module SimCtl
         if Xcode::Version.gte? '8.0'
           [
             'com.apple.mobileassetd',
-            'com.apple.nsurlsessiond',
+            'com.apple.nsurlsessiond'
           ]
         else
           [
             'com.apple.mobileassetd',
-            'com.apple.networkd',
+            'com.apple.networkd'
           ]
         end
       when :ios
@@ -253,20 +253,20 @@ module SimCtl
             'com.apple.backboardd',
             'com.apple.mobile.installd',
             'com.apple.CoreSimulator.bridge',
-            'com.apple.SpringBoard',
+            'com.apple.SpringBoard'
           ]
         elsif Xcode::Version.gte? '8.0'
           [
             'com.apple.SimulatorBridge',
             'com.apple.SpringBoard',
             'com.apple.backboardd',
-            'com.apple.mobile.installd',
+            'com.apple.mobile.installd'
           ]
         else
           [
             'com.apple.SimulatorBridge',
             'com.apple.SpringBoard',
-            'com.apple.mobile.installd',
+            'com.apple.mobile.installd'
           ]
         end
       else

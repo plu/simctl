@@ -18,9 +18,11 @@ module SimCtl
 
     def launchctl
       @launchctl ||= if Xcode::Version.gte? '9.0'
-                       "#{Xcode::Path.home}//Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/bin/launchctl"
+                       "#{Xcode::Path.home}/Platforms/iPhoneOS.platform/Developer/"\
+                       'Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/'\
+                       'Contents/Resources/RuntimeRoot/bin/launchctl'
                      else
-                        File.join(runtime_root, 'bin/launchctl')
+                       File.join(runtime_root, 'bin/launchctl')
                      end
     end
 
@@ -38,8 +40,9 @@ module SimCtl
     end
 
     def locate_runtime_root
-      "/Library/Developer/CoreSimulator/Profiles/Runtimes/#{device.runtime.name}.simruntime/Contents/Resources/RuntimeRoot".tap do |path|
-        return path if File.exists?(path)
+      "/Library/Developer/CoreSimulator/Profiles/Runtimes/#{device.runtime.name}.simruntime/"\
+      'Contents/Resources/RuntimeRoot'.tap do |path|
+        return path if File.exist?(path)
       end
       Xcode::Path.sdk_root
     end

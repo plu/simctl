@@ -16,7 +16,7 @@ module SimCtl
         list_devices.each do |device|
           device.kill
           device.shutdown if device.state != :shutdown
-          device.wait {|d| d.state == :shutdown}
+          device.wait { |d| d.state == :shutdown }
           device.delete
         end
       end
