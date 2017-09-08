@@ -7,13 +7,13 @@ module SimCtl
     end
 
     def list
-      fields = [:pid, :status, :name]
+      fields = %i[pid status name]
       device
         .spawn(device.path.launchctl, ['list'])
         .split("\n")
         .drop(1)
-        .map {|item| Hash[fields.zip(item.split("\t"))] }
-        .map {|item| OpenStruct.new(item) }
+        .map { |item| Hash[fields.zip(item.split("\t"))] }
+        .map { |item| OpenStruct.new(item) }
     end
 
     private

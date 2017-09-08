@@ -6,7 +6,7 @@ module SimCtl
 
     def ==(other)
       return false if other.nil?
-      return false unless other.kind_of? DeviceType
+      return false unless other.is_a? DeviceType
       other.identifier == identifier
     end
   end

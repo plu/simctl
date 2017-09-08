@@ -5,14 +5,14 @@ SimpleCov.start do
 end
 Coveralls.wear!
 
-$LOAD_PATH.push File.expand_path("../../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('../../lib', __FILE__)
 require File.dirname(__FILE__) + '/../lib/simctl.rb'
 
-if ENV['TRAVIS']
-  SimCtl.default_timeout = 300
-else
-  SimCtl.default_timeout = 60
-end
+SimCtl.default_timeout = if ENV['TRAVIS']
+                           300
+                         else
+                           60
+                         end
 
 SimCtl.device_set_path = Dir.mktmpdir 'foo bar' if ENV['CUSTOM_DEVICE_SET_PATH']
 
@@ -28,9 +28,7 @@ RSpec.configure do |config|
   end
 
   def with_rescue(&block)
-    begin
-      block.class
-    rescue
-    end
+    block.class
+  rescue
   end
 end

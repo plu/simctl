@@ -11,5 +11,3 @@ module SimCtl
     end
   end
 end
-
-

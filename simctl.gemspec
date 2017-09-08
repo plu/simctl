@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'simctl/version'
 
@@ -9,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = 'Ruby interface to xcrun simctl'
 
   s.authors = ['Johannes Plunien']
-  s.email = %w(plu@pqpq.de)
+  s.email = %w[plu@pqpq.de]
   s.homepage = 'https://github.com/plu/simctl'
   s.licenses = ['MIT']
 
@@ -21,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coveralls'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rubocop'
 
   s.add_dependency 'CFPropertyList'
   s.add_dependency 'naturally'

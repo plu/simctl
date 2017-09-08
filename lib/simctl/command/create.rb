@@ -14,10 +14,11 @@ module SimCtl
         devicetype = devicetype(name: devicetype) unless devicetype.is_a?(DeviceType)
         raise "Invalid runtime: #{runtime}" unless runtime.is_a?(Runtime)
         raise "Invalid devicetype: #{devicetype}" unless devicetype.is_a?(DeviceType)
-        device = Executor.execute(command_for('create', Shellwords.shellescape(name), devicetype.identifier, runtime.identifier)) do |identifier|
+        command = command_for('create', Shellwords.shellescape(name), devicetype.identifier, runtime.identifier)
+        device = Executor.execute(command) do |identifier|
           device(udid: identifier)
         end
-        device.wait {|d| d.state == :shutdown && File.exists?(d.path.device_plist)}
+        device.wait { |d| d.state == :shutdown && File.exist?(d.path.device_plist) }
         device
       end
     end
