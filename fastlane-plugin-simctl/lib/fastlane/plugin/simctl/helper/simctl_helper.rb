@@ -1,8 +1,8 @@
 module Fastlane
   module Helper
     class SimctlHelper
-      def self.execute_with_simulator_ready(block, runtime, type)
-        device = create_device(runtime, type)
+      def self.execute_with_simulator_ready(block, runtime, type, name)
+        device = create_device(runtime, type, name)
         device.launch
         device.wait(90) do |d|
           Fastlane::UI.message("Waiting for simulator `#{d.name}` to be ready")
@@ -17,16 +17,19 @@ module Fastlane
         end
       end
 
-      def self.create_device(runtime, type)
+      def self.create_device(runtime, type, name)
         runtime = if runtime.eql? 'latest'
                     SimCtl::Runtime.latest('ios')
                   else
                     SimCtl.runtime(name: runtime)
                   end
         device_type = SimCtl.devicetype(name: type)
-        device_name = type.to_s
-        device_name += "-#{ENV['JOB_NAME']}" if ENV['JOB_NAME']
-        device_name += "@#{ENV['BUILD_NUMBER']}" if ENV['BUILD_NUMBER']
+        device_name = name
+        device_name ||= type.to_s.instance_eval do |obj|
+          obj += "-#{ENV['JOB_NAME']}" if ENV['JOB_NAME']
+          obj += "@#{ENV['BUILD_NUMBER']}" if ENV['BUILD_NUMBER']
+          obj
+        end
         Fastlane::UI.message("Starting simulator with runtime: `#{runtime.name}`, device type: `#{device_type.name}`"\
           " and device name: `#{device_name}`")
         SimCtl.reset_device(device_name, device_type, runtime)
