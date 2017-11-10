@@ -4,7 +4,7 @@ module Fastlane
   module Actions
     class SimctlAction < Action
       def self.run(params)
-        Helper::SimctlHelper.execute_with_simulator_ready(params[:block], params[:runtime], params[:type], params[:name])
+        Helper::SimctlHelper.execute_with_simulator_ready(self, params[:block], params[:runtime], params[:type], params[:name])
       end
 
       def self.description

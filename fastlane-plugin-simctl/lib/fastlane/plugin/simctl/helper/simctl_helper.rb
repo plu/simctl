@@ -1,7 +1,7 @@
 module Fastlane
   module Helper
     class SimctlHelper
-      def self.execute_with_simulator_ready(block, runtime, type, name)
+      def self.execute_with_simulator_ready(action, block, runtime, type, name)
         device = create_device(runtime, type, name)
         device.launch
         device.wait(90) do |d|
@@ -9,7 +9,7 @@ module Fastlane
           d.state == :booted && d.ready?
         end
         begin
-          block.call(device)
+          block.call(action.other_action, device)
         rescue StandardError => error
           throw error
         ensure
