@@ -1,3 +1,5 @@
+require 'cfpropertylist'
+
 module SimCtl
   class DevicePath
     def initialize(device)
@@ -17,13 +19,7 @@ module SimCtl
     end
 
     def launchctl
-      @launchctl ||= if Xcode::Version.gte? '9.0'
-                       "#{Xcode::Path.home}/Platforms/iPhoneOS.platform/Developer/"\
-                       'Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/'\
-                       'Contents/Resources/RuntimeRoot/bin/launchctl'
-                     else
-                       File.join(runtime_root, 'bin/launchctl')
-                     end
+      @launchctl ||= File.join(runtime_root, 'bin/launchctl')
     end
 
     def preferences_plist
@@ -40,10 +36,22 @@ module SimCtl
     end
 
     def locate_runtime_root
-      "/Library/Developer/CoreSimulator/Profiles/Runtimes/#{device.runtime.name}.simruntime/"\
-      'Contents/Resources/RuntimeRoot'.tap do |path|
-        return path if File.exist?(path)
+      runtime_identifier = device.runtime.identifier
+
+      [
+        Xcode::Path.runtime_profiles,
+        '/Library/Developer/CoreSimulator/Profiles/Runtimes/'
+      ].each do |parent_dir|
+        Dir.glob(File.join(File.expand_path(parent_dir), '*')).each do |dir|
+          plist_path = File.join(dir, 'Contents/Info.plist')
+          next unless File.exist?(plist_path)
+          info = CFPropertyList.native_types(CFPropertyList::List.new(file: plist_path).value)
+          next unless info.is_a?(Hash) && (info['CFBundleIdentifier'] == runtime_identifier)
+          root_path = File.join(dir, 'Contents/Resources/RuntimeRoot')
+          return root_path if File.exist?(root_path)
+        end
       end
+
       Xcode::Path.sdk_root
     end
 
