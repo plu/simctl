@@ -1,7 +1,6 @@
 module SimCtl
   module Xcode
     class Path
-
       class << self
         def home
           @home ||= `xcode-select -p`.chomp
