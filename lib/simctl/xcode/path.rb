@@ -4,7 +4,7 @@ module SimCtl
 
       class << self
         def home
-          `xcode-select -p`.chomp
+          @home ||= `xcode-select -p`.chomp
         end
 
         def sdk_root
