@@ -1,3 +1,11 @@
+# 1.6.4
+
+* Device locale can now be set via `device.set_locale('en_EN')`
+
+# 1.6.3
+
+* Execute `xcode-select` lazily, not during load
+
 # 1.6.2
 
 * Support Xcode 9
