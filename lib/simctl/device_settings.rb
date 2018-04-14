@@ -57,5 +57,14 @@ module SimCtl
         plist[key].unshift(language).uniq!
       end
     end
+
+    # Sets the device locale
+    #
+    # @return [void]
+    def set_locale(locale)
+      edit_plist(path.global_preferences_plist) do |plist|
+        plist['AppleLocale'] = locale
+      end
+    end
   end
 end
