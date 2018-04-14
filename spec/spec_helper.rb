@@ -1,3 +1,4 @@
+require 'cfpropertylist'
 require 'coveralls'
 require 'simplecov'
 SimpleCov.start do
@@ -30,5 +31,10 @@ RSpec.configure do |config|
   def with_rescue(&block)
     block.class
   rescue
+  end
+
+  def plist(path)
+    plist = CFPropertyList::List.new(file: path)
+    CFPropertyList.native_types(plist.value)
   end
 end

@@ -1,4 +1,3 @@
-require 'cfpropertylist'
 require 'securerandom'
 require 'spec_helper'
 
@@ -95,8 +94,7 @@ RSpec.describe SimCtl, order: :defined do
     describe 'setting the device language' do
       it 'sets the device language' do
         @device.settings.set_language('de')
-        plist = CFPropertyList::List.new(file: @device.path.global_preferences_plist)
-        content = CFPropertyList.native_types(plist.value)
+        content = plist(@device.path.global_preferences_plist)
         expect(content['AppleLanguages']).to include('de')
       end
     end
@@ -104,8 +102,7 @@ RSpec.describe SimCtl, order: :defined do
     describe 'setting the device locale' do
       it 'sets the device locale' do
         @device.settings.set_locale('en_DE')
-        plist = CFPropertyList::List.new(file: @device.path.global_preferences_plist)
-        content = CFPropertyList.native_types(plist.value)
+        content = plist(@device.path.global_preferences_plist)
         expect(content['AppleLocale']).to be == 'en_DE'
       end
     end
