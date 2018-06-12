@@ -3,7 +3,7 @@ module Fastlane
     class SimctlHelper
       def self.execute_with_simulator_ready(action, block, runtime, type, name)
         device = create_device(runtime, type, name)
-        device.launch
+        device.boot
         device.wait(90) do |d|
           Fastlane::UI.message("Waiting for simulator `#{d.name}` to be ready")
           d.state == :booted && d.ready?
