@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simctl (1.6.4)
+    simctl (1.6.5)
       CFPropertyList
       naturally
 
@@ -19,7 +19,7 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     json (2.0.2)
-    naturally (2.1.0)
+    naturally (2.2.0)
     parallel (1.12.0)
     parser (2.4.0.0)
       ast (~> 2.2)
@@ -70,4 +70,4 @@ DEPENDENCIES
   simctl!
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
