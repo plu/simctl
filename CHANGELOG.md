@@ -1,3 +1,7 @@
+# 1.6.6
+
+* Fix `device.reset`
+
 # 1.6.4
 
 * Device locale can now be set via `device.set_locale('en_EN')`
