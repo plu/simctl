@@ -18,11 +18,11 @@ devicetype = SimCtl.devicetype(name: 'iPhone 6')
 # Create a new device
 device = SimCtl.create_device 'Unit Tests @ iPhone 6 - 12.4', devicetype, runtime
 
-# Launch a new Simulator.app instance
-device.launch
-
 # Boot the device
 device.boot
+
+# Launch a new Simulator.app instance
+device.launch
 
 # Wait for the device to be booted
 device.wait {|d| d.state == :booted}
