@@ -13,6 +13,7 @@ module SimCtl
         device = device(devicetype: devicetype, runtime: runtime)
         raise DeviceNotFound, "Could not find device with type '#{devicetype.name}' and runtime '#{runtime.name}'" if device.nil?
         device.launch
+        device.boot
         device.wait(timeout) { |d| d.state == :booted && d.ready? }
         device
       end
