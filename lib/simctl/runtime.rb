@@ -3,12 +3,19 @@ require 'simctl/object'
 
 module SimCtl
   class Runtime < Object
-    attr_reader :availability, :buildversion, :identifier, :name, :type, :version
+    extend Gem::Deprecate
+
+    attr_reader :buildversion, :identifier, :is_available, :name, :type, :version
 
     def initialize(args)
-      args['availability'] = args['isAvailable'] # Property was renamed on some Xcode update
+      args['is_available'] = args.delete('isAvailable')
       super
     end
+
+    def availability
+      is_available
+    end
+    deprecate :availability, :is_available, 2019, 8
 
     def type
       @type ||= name.split("\s").first.downcase.to_sym

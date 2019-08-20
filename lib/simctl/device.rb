@@ -8,18 +8,25 @@ require 'timeout'
 
 module SimCtl
   class Device < Object
-    attr_reader :availability, :name, :os, :state, :udid
+    extend Gem::Deprecate
+
+    attr_reader :is_available, :name, :os, :state, :udid
 
     def initialize(args)
-      args['availability'] = args['isAvailable'] # Property was renamed on some Xcode update
+      args['is_available'] = args.delete('isAvailable')
       super
     end
+
+    def availability
+      is_available
+    end
+    deprecate :availability, :is_available, 2019, 8
 
     # Returns true/false if the device is available
     #
     # @return [Bool]
     def available?
-      availability !~ /unavailable/i
+      is_available !~ /unavailable/i
     end
 
     # Boots the device
