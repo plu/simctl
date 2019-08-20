@@ -44,7 +44,7 @@ RSpec.describe SimCtl, order: :defined do
     end
 
     it 'has a availability property' do
-      expect(@device.availability).not_to be_nil
+      expect(@device.is_available).not_to be_nil
     end
 
     it 'has a os property' do

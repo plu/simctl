@@ -39,7 +39,7 @@ RSpec.describe SimCtl do
     end
 
     it 'parses availability property' do
-      expect(SimCtl.list_runtimes.first.availability).not_to be_nil
+      expect(SimCtl.list_runtimes.first.is_available).not_to be_nil
     end
 
     it 'parses buildversion property' do
