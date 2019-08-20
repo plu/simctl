@@ -148,7 +148,7 @@ RSpec.describe SimCtl, order: :defined do
 
   describe 'launching the device' do
     it 'launches the device' do
-      @device.launch
+      @device.boot
       @device.wait { |d| d.state == :booted }
       expect(@device.state).to be == :booted
     end
@@ -226,13 +226,13 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
-  describe 'killing the device' do
+  describe 'shutdown the device' do
     it 'state is booted' do
       expect(@device.state).to be == :booted
     end
 
-    it 'kills the device' do
-      @device.kill
+    it 'shuts down the device' do
+      @device.shutdown
       @device.wait { |d| d.state == :shutdown }
     end
 
@@ -293,7 +293,8 @@ RSpec.describe SimCtl, order: :defined do
     it 'deletes the device' do
       device = SimCtl.create_device @name, @devicetype, @runtime
       device.delete
-      expect(SimCtl.device(udid: @device.udid)).to be_nil
+      device.wait { SimCtl.device(udid: device.udid).nil? }
+      expect(SimCtl.device(udid: device.udid)).to be_nil
     end
   end
 end
