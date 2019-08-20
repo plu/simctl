@@ -15,7 +15,7 @@ module SimCtl
     def availability
       is_available
     end
-    deprecate :availability, :is_available, 2019, 8
+    deprecate :availability, :is_available, 2020, 8
 
     def type
       @type ||= name.split("\s").first.downcase.to_sym
