@@ -4,7 +4,7 @@ require 'spec_helper'
 RSpec.describe SimCtl, order: :defined do
   before(:all) do
     @name = SecureRandom.hex
-    @devicetype = SimCtl.devicetype(name: 'iPhone 6')
+    @devicetype = SimCtl.devicetype(name: 'iPhone 8')
     @runtime = SimCtl::Runtime.latest(:ios)
     @device = SimCtl.create_device @name, @devicetype, @runtime
     @device.wait { |d| d.state == :shutdown }
