@@ -69,7 +69,7 @@ RSpec.describe SimCtl do
 
   describe '#runtime' do
     it 'find runtime by name' do
-      expect(SimCtl.runtime(name: 'iOS 9.3')).to be_kind_of SimCtl::Runtime
+      expect(SimCtl.runtime(name: 'iOS 12.4')).to be_kind_of SimCtl::Runtime
     end
 
     it 'raise exception if runtime is not found' do
