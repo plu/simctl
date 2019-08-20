@@ -9,17 +9,20 @@ Ruby interface to xcrun simctl. Manage your iOS Simulators directly from a ruby 
 ```ruby
 require 'simctl'
 
-# Select the iOS 9.3 runtime
-runtime = SimCtl.runtime(name: 'iOS 9.3')
+# Select the iOS 12.4 runtime
+runtime = SimCtl.runtime(name: 'iOS 12.4')
 
 # Select the iPhone 6 device type
 devicetype = SimCtl.devicetype(name: 'iPhone 6')
 
 # Create a new device
-device = SimCtl.create_device 'Unit Tests @ iPhone 6 9.3', devicetype, runtime
+device = SimCtl.create_device 'Unit Tests @ iPhone 6 - 12.4', devicetype, runtime
 
 # Launch a new Simulator.app instance
 device.launch
+
+# Boot the device
+device.boot
 
 # Wait for the device to be booted
 device.wait {|d| d.state == :booted}
@@ -37,7 +40,7 @@ device.delete
 
 ## License (MIT)
 
-Copyright (C) 2016 Johannes Plunien
+Copyright (C) 2019 Johannes Plunien
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
