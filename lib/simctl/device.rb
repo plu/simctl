@@ -10,6 +10,11 @@ module SimCtl
   class Device < Object
     attr_reader :availability, :name, :os, :state, :udid
 
+    def initialize(args)
+      args['availability'] = args['isAvailable'] # Property was renamed on some Xcode update
+      super
+    end
+
     # Returns true/false if the device is available
     #
     # @return [Bool]
