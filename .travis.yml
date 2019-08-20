@@ -2,16 +2,10 @@ language: objective-c
 matrix:
   include:
     - os: osx
-      osx_image: xcode8.3
+      osx_image: xcode10.3
       env: CUSTOM_DEVICE_SET_PATH=true
     - os: osx
-      osx_image: xcode8.3
-      env: CUSTOM_DEVICE_SET_PATH=false
-    - os: osx
-      osx_image: xcode9
-      env: CUSTOM_DEVICE_SET_PATH=true
-    - os: osx
-      osx_image: xcode9
+      osx_image: xcode10.3
       env: CUSTOM_DEVICE_SET_PATH=false
 before_script:
   - export LANG=en_US.UTF-8
