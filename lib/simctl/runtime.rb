@@ -5,6 +5,11 @@ module SimCtl
   class Runtime < Object
     attr_reader :availability, :buildversion, :identifier, :name, :type, :version
 
+    def initialize(args)
+      args['availability'] = args['isAvailable'] # Property was renamed on some Xcode update
+      super
+    end
+
     def type
       @type ||= name.split("\s").first.downcase.to_sym
     end
