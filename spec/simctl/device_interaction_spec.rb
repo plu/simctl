@@ -58,7 +58,7 @@ RSpec.describe SimCtl, order: :defined do
     describe '#path' do
       before(:all) do
         @device.boot
-        @device.wait { |d| File.exists?(d.path.device_plist) && File.exists?(d.path.global_preferences_plist) }
+        @device.wait { |d| File.exist?(d.path.device_plist) && File.exist?(d.path.global_preferences_plist) }
       end
 
       after(:all) do
