@@ -4,7 +4,7 @@ RSpec.describe SimCtl do
   describe '#warmup' do
     if SimCtl.device_set_path.nil?
       it 'warms up and returns a device for given strings' do
-        expect(SimCtl.warmup('iPhone 6', 'iOS 12.4')).to be_kind_of SimCtl::Device
+        expect(SimCtl.warmup('iPhone 6', 'iOS 12.1')).to be_kind_of SimCtl::Device
       end
 
       it 'warms up and returns a device for given objects' do
@@ -14,7 +14,7 @@ RSpec.describe SimCtl do
       end
     else
       it 'raises exception' do
-        expect { SimCtl.warmup('iPhone 6', 'iOS 12.4') }.to raise_error SimCtl::DeviceNotFound
+        expect { SimCtl.warmup('iPhone 6', 'iOS 12.1') }.to raise_error SimCtl::DeviceNotFound
       end
     end
   end
