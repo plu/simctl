@@ -11,7 +11,9 @@ module SimCtl
         end
 
         def runtime_profiles
-          if Xcode::Version.gte? '9.0'
+          if Xcode::Version.gte? '11.0'
+            File.join(home, 'Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/')
+          elsif Xcode::Version.gte? '9.0'
             File.join(home, 'Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/')
           else
             File.join(home, 'Platforms/iPhoneSimulator.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/')
