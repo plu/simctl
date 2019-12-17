@@ -13,6 +13,7 @@ module SimCtl
     # @return [void]
     def disable_keyboard_helpers
       edit_plist(path.preferences_plist) do |plist|
+        plist['DidShowContinuousPathIntroduction'] = true
         %w[
           KeyboardAllowPaddle
           KeyboardAssistant
