@@ -1,3 +1,7 @@
+# 1.6.7
+
+* Turn off sliding hint on keyboard
+
 # 1.6.6
 
 * Fix `device.reset`
