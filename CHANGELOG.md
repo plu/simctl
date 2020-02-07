@@ -1,3 +1,5 @@
+* Add `upgrade` command
+
 # 1.6.7
 
 * Turn off sliding hint on keyboard

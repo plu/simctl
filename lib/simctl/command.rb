@@ -14,6 +14,7 @@ require 'simctl/command/reset'
 require 'simctl/command/shutdown'
 require 'simctl/command/spawn'
 require 'simctl/command/uninstall'
+require 'simctl/command/upgrade'
 require 'simctl/command/warmup'
 require 'simctl/executor'
 require 'shellwords'
@@ -38,6 +39,7 @@ module SimCtl
     include SimCtl::Command::Shutdown
     include SimCtl::Command::Spawn
     include SimCtl::Command::Uninstall
+    include SimCtl::Command::Upgrade
     include SimCtl::Command::Warmup
 
     def device_set_path=(device_set_path)
