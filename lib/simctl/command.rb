@@ -10,6 +10,7 @@ require 'simctl/command/privacy'
 require 'simctl/command/terminate'
 require 'simctl/command/list'
 require 'simctl/command/openurl'
+require 'simctl/command/push'
 require 'simctl/command/rename'
 require 'simctl/command/reset'
 require 'simctl/command/shutdown'
@@ -36,6 +37,7 @@ module SimCtl
     include SimCtl::Command::List
     include SimCtl::Command::OpenUrl
     include SimCtl::Command::Privacy
+    include SimCtl::Command::Push
     include SimCtl::Command::Rename
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
