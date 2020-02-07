@@ -169,31 +169,33 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
-  describe 'overriding status bar values' do
-    it 'overrides the status bar values' do
-      @device.status_bar.override SimCtl::StatusBarOverrides.new(
-        time: '10:45',
-        dataNetwork: 'lte+',
-        wifiMode: 'active',
-        cellularMode: 'active',
-        batteryState: 'charging',
-        batteryLevel: 50
-      )
-    end
+  if SimCtl::Xcode::Version.gte?('11.4')
+    describe 'overriding status bar values' do
+      it 'overrides the status bar values' do
+        @device.status_bar.override SimCtl::StatusBarOverrides.new(
+          time: '10:45',
+          dataNetwork: 'lte+',
+          wifiMode: 'active',
+          cellularMode: 'active',
+          batteryState: 'charging',
+          batteryLevel: 50
+        )
+      end
 
-    it 'overrides the status bar values with a hash' do
-      @device.status_bar.override(
-        time: '10:45',
-        dataNetwork: 'lte+',
-        wifiMode: 'active',
-        cellularMode: 'active',
-        batteryState: 'charging',
-        batteryLevel: 50
-      )
-    end
+      it 'overrides the status bar values with a hash' do
+        @device.status_bar.override(
+          time: '10:45',
+          dataNetwork: 'lte+',
+          wifiMode: 'active',
+          cellularMode: 'active',
+          batteryState: 'charging',
+          batteryLevel: 50
+        )
+      end
 
-    it 'clears the status bar' do
-      @device.status_bar.clear
+      it 'clears the status bar' do
+        @device.status_bar.clear
+      end
     end
   end
 
