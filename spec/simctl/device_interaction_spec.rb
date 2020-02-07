@@ -197,6 +197,11 @@ RSpec.describe SimCtl, order: :defined do
         @device.status_bar.clear
       end
     end
+  else
+    it 'raises exception' do
+      expect { @device.status_bar.clear }.to raise_error SimCtl::UnsupportedCommandError
+      expect { @device.status_bar.override(time: '10:45') }.to raise_error SimCtl::UnsupportedCommandError
+    end
   end
 
   describe 'launching a system app' do
