@@ -8,7 +8,7 @@ RSpec.describe SimCtl do
       device = SimCtl.reset_device 'iPhone 8', SimCtl.devicetype(name: 'iPhone 8'), old_runtime
       expect(device.runtime.version).to be == old_runtime.version
       SimCtl.upgrade device, new_runtime
-      device.wait {|d| d.runtime.version == new_runtime.version}
+      device.wait { |d| d.runtime.version == new_runtime.version }
       device.delete
     end
   end

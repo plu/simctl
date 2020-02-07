@@ -40,7 +40,7 @@ end
 module SimCtl
   class StatusBarOverrides < OpenStruct
     def to_args
-      to_h.map {|k,v| ["--#{k}", v]}.flatten
+      to_h.map { |k, v| ["--#{k}", v] }.flatten
     end
   end
 end
