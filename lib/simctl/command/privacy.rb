@@ -1,5 +1,3 @@
-require 'shellwords'
-
 module SimCtl
   class Command
     module Privacy
