@@ -169,8 +169,8 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
-  if SimCtl::Xcode::Version.gte?('11.4')
-    describe 'overriding status bar values' do
+  describe 'overriding status bar values' do
+    if SimCtl::Xcode::Version.gte?('11.4')
       it 'overrides the status bar values' do
         @device.status_bar.override SimCtl::StatusBarOverrides.new(
           time: '10:45',
@@ -196,11 +196,11 @@ RSpec.describe SimCtl, order: :defined do
       it 'clears the status bar' do
         @device.status_bar.clear
       end
-    end
-  else
-    it 'raises exception' do
-      expect { @device.status_bar.clear }.to raise_error SimCtl::UnsupportedCommandError
-      expect { @device.status_bar.override(time: '10:45') }.to raise_error SimCtl::UnsupportedCommandError
+    else
+      it 'raises exception' do
+        expect { @device.status_bar.clear }.to raise_error SimCtl::UnsupportedCommandError
+        expect { @device.status_bar.override(time: '10:45') }.to raise_error SimCtl::UnsupportedCommandError
+      end
     end
   end
 
@@ -255,6 +255,18 @@ RSpec.describe SimCtl, order: :defined do
     else
       it 'raises exception' do
         expect { @device.terminate_app('com.github.plu.simctl.SampleApp') }.to raise_error SimCtl::UnsupportedCommandError
+      end
+    end
+  end
+
+  describe 'changing privacy settings' do
+    if SimCtl::Xcode::Version.gte?('11.4')
+      it 'resets all privacy settings' do
+        @device.privacy('reset', 'all', 'com.github.plu.simctl.SampleApp')
+      end
+    else
+      it 'raises exception' do
+        expect { @device.privacy('reset', 'all', 'com.github.plu.simctl.SampleApp') }.to raise_error SimCtl::UnsupportedCommandError
       end
     end
   end

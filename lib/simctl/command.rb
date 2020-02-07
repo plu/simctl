@@ -6,6 +6,7 @@ require 'simctl/command/install'
 require 'simctl/command/io'
 require 'simctl/command/kill'
 require 'simctl/command/launch'
+require 'simctl/command/privacy'
 require 'simctl/command/terminate'
 require 'simctl/command/list'
 require 'simctl/command/openurl'
@@ -32,14 +33,15 @@ module SimCtl
     include SimCtl::Command::Install
     include SimCtl::Command::Kill
     include SimCtl::Command::Launch
-    include SimCtl::Command::Terminate
     include SimCtl::Command::List
     include SimCtl::Command::OpenUrl
+    include SimCtl::Command::Privacy
     include SimCtl::Command::Rename
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
     include SimCtl::Command::Spawn
     include SimCtl::Command::StatusBar
+    include SimCtl::Command::Terminate
     include SimCtl::Command::Uninstall
     include SimCtl::Command::Upgrade
     include SimCtl::Command::Warmup

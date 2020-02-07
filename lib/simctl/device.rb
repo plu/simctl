@@ -126,6 +126,18 @@ module SimCtl
       @path ||= DevicePath.new(self)
     end
 
+    # Change privacy settings
+    #
+    # @param action [String] grant, revoke, reset
+    # @param service [String] all, calendar, contacts-limited, contacts, location,
+    #                location-always, photos-add, photos, media-library, microphone,
+    #                motion, reminders, siri
+    # @param bundle [String] bundle identifier
+    # @return [void]
+    def privacy(action, service, bundle)
+      SimCtl.privacy(self, action, service, bundle)
+    end
+
     # Returns true/false if the device is ready
     # Uses [SimCtl::DeviceLaunchctl] to look for certain services being running.
     #
