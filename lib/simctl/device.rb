@@ -4,6 +4,7 @@ require 'simctl/device_launchctl'
 require 'simctl/device_path'
 require 'simctl/device_settings'
 require 'simctl/object'
+require 'simctl/status_bar'
 require 'timeout'
 
 module SimCtl
@@ -162,7 +163,7 @@ module SimCtl
       SimCtl.reset_device name, devicetype, runtime
     end
 
-    # Resets the runtime
+    # Returns the runtime object
     #
     # @return [SimCtl::Runtime]
     def runtime
@@ -208,6 +209,13 @@ module SimCtl
     # @return [sym]
     def state
       @state.downcase.to_sym
+    end
+
+    # Returns the status bar object
+    #
+    # @return [SimCtl::StatusBar]
+    def status_bar
+      @status_bar ||= SimCtl::StatusBar.new(self)
     end
 
     # Reloads the device until the given block returns true

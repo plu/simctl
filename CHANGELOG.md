@@ -1,4 +1,6 @@
 * Add `upgrade` command
+* Add `status_bar_clear` command
+* Add `status_bar_override` command
 
 # 1.6.7
 

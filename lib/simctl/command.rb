@@ -13,6 +13,7 @@ require 'simctl/command/rename'
 require 'simctl/command/reset'
 require 'simctl/command/shutdown'
 require 'simctl/command/spawn'
+require 'simctl/command/status_bar'
 require 'simctl/command/uninstall'
 require 'simctl/command/upgrade'
 require 'simctl/command/warmup'
@@ -38,6 +39,7 @@ module SimCtl
     include SimCtl::Command::Reset
     include SimCtl::Command::Shutdown
     include SimCtl::Command::Spawn
+    include SimCtl::Command::StatusBar
     include SimCtl::Command::Uninstall
     include SimCtl::Command::Upgrade
     include SimCtl::Command::Warmup
