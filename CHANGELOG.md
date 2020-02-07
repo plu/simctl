@@ -1,6 +1,6 @@
 * Add `upgrade` command
-* Add `status_bar_clear` command
-* Add `status_bar_override` command
+* Add `status_bar_clear` command (requires Xcode 11.4 or newer)
+* Add `status_bar_override` command (requires Xcode 11.4 or newer)
 
 # 1.6.7
 
