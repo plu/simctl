@@ -8,6 +8,9 @@ module SimCtl
       # @param device [SimCtl::Device] the device
       # @return [void]
       def status_bar_clear(device)
+        unless Xcode::Version.gte? '11.4'
+          raise UnsupportedCommandError, 'Needs at least Xcode 11.4'
+        end
         Executor.execute(command_for('status_bar', device.udid, 'clear'))
       end
 
@@ -30,6 +33,9 @@ module SimCtl
       # @param overrides [SimCtl::StatusBarOverrides] or [Hash] the overrides to apply
       # @return [void]
       def status_bar_override(device, overrides)
+        unless Xcode::Version.gte? '11.4'
+          raise UnsupportedCommandError, 'Needs at least Xcode 11.4'
+        end
         overrides = SimCtl::StatusBarOverrides.new overrides unless overrides.is_a?(SimCtl::StatusBarOverrides)
         Executor.execute(command_for('status_bar', device.udid, 'override', *overrides.to_args))
       end
