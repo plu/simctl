@@ -21,7 +21,7 @@ GEM
     io-console (0.5.5)
     irb (1.2.1)
       reline (>= 0.0.1)
-    json (2.2.0)
+    json (2.3.1)
     naturally (2.2.0)
     parallel (1.17.0)
     parser (2.6.3.0)
