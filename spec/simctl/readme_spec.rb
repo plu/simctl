@@ -2,14 +2,14 @@ require 'spec_helper'
 
 RSpec.describe SimCtl do
   it 'executes example code from readme' do
-    # Select the iOS 13.7 runtime
-    runtime = SimCtl.runtime(name: 'iOS 13.7')
+    # Select the iOS 14.5 runtime
+    runtime = SimCtl.runtime(name: 'iOS 14.5')
 
-    # Select the iPhone 6 device type
-    devicetype = SimCtl.devicetype(name: 'iPhone 6')
+    # Select the iPhone 8 device type
+    devicetype = SimCtl.devicetype(name: 'iPhone 8')
 
     # Create a new device
-    device = SimCtl.create_device 'Unit Tests @ iPhone 6 - 13.7', devicetype, runtime
+    device = SimCtl.create_device 'Unit Tests @ iPhone 8 - 14.5', devicetype, runtime
 
     # Boot the device
     device.boot

@@ -34,7 +34,7 @@ module Fastlane
                                description: "iOS device type used to create the simulator",
                                   optional: true,
                                       type: String,
-                             default_value: 'iPhone 6'),
+                             default_value: 'iPhone 8'),
           FastlaneCore::ConfigItem.new(key: :name,
                                description: "String used to set the name to the simulator",
                                   optional: true,
