@@ -4,6 +4,7 @@ require 'simctl/command/delete'
 require 'simctl/command/erase'
 require 'simctl/command/install'
 require 'simctl/command/io'
+require 'simctl/command/keychain'
 require 'simctl/command/kill'
 require 'simctl/command/launch'
 require 'simctl/command/privacy'
@@ -32,6 +33,7 @@ module SimCtl
     include SimCtl::Command::Erase
     include SimCtl::Command::IO
     include SimCtl::Command::Install
+    include SimCtl::Command::Keychain
     include SimCtl::Command::Kill
     include SimCtl::Command::Launch
     include SimCtl::Command::List

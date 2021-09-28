@@ -169,6 +169,18 @@ RSpec.describe SimCtl, order: :defined do
     end
   end
 
+  describe 'keychain operations' do
+    if SimCtl::Xcode::Version.gte?('11.4')
+      it 'resets the keychain' do
+        @device.keychain.reset
+      end
+    else
+      it 'raises exception' do
+        expect { @device.keychain.reset }.to raise_error SimCtl::UnsupportedCommandError
+      end
+    end
+  end
+
   describe 'overriding status bar values' do
     if SimCtl::Xcode::Version.gte?('11.4')
       it 'overrides the status bar values' do

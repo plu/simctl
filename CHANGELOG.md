@@ -1,3 +1,7 @@
+# 1.6.9
+
+* Add `keychain_reset` command
+
 # 1.6.8
 
 * Add `upgrade` command

@@ -95,6 +95,13 @@ module SimCtl
       @launchctl ||= DeviceLaunchctl.new(self)
     end
 
+    # Returns the keychain bar object
+    #
+    # @return [SimCtl::keychain]
+    def keychain
+      @keychain ||= SimCtl::Keychain.new(self)
+    end
+
     # Launches an app in the given device
     #
     # @param opts [Hash] options hash - `{ wait_for_debugger: true/false }`
