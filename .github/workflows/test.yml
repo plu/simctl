@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build:
     env:
-      LANG=en_US.UTF-8
+      LANG: en_US.UTF-8
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
