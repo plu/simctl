@@ -28,7 +28,12 @@ module SimCtl
     #
     # @return [Bool]
     def available?
-      is_available !~ /unavailable/i
+      case is_available
+      when String
+        is_available !~ /unavailable/i
+      else
+        is_available
+      end
     end
 
     # Boots the device
