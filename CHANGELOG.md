@@ -1,3 +1,7 @@
+# 1.7.0
+
+* Fix issue with Ruby >= 3.2
+
 # 1.6.9
 
 * Add `keychain_reset` command
