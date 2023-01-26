@@ -10,7 +10,7 @@ module SimCtl
       def warmup(devicetype, runtime, timeout = 120)
         devicetype = devicetype(name: devicetype) unless devicetype.is_a?(DeviceType)
         runtime = runtime(name: runtime) unless runtime.is_a?(Runtime)
-        device = device(devicetype: devicetype, runtime: runtime)
+        device = device(runtime: runtime, devicetype: devicetype)
         raise DeviceNotFound, "Could not find device with type '#{devicetype.name}' and runtime '#{runtime.name}'" if device.nil?
         device.boot if device.state != :booted
         device.wait(timeout) { |d| d.state == :booted && d.ready? }
