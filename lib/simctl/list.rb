@@ -12,10 +12,10 @@ module SimCtl
       select do |item|
         filter.each do |key, value|
           return false unless case value
-                                when Regexp
-                                  item.send(key) =~ value
-                                else
-                                  item.send(key) == value
+                              when Regexp
+                                item.send(key) =~ value
+                              else
+                                item.send(key) == value
                               end
         end
         true
