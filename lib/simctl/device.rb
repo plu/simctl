@@ -54,11 +54,9 @@ module SimCtl
     #
     # @return [SimCtl::DeviceType, String]
     def devicetype
-      begin
-        @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
-      rescue
-        plist.deviceType
-      end
+      @devicetype ||= SimCtl.devicetype(identifier: plist.deviceType)
+    rescue
+      plist.deviceType
     end
 
     # Erases the device
@@ -196,11 +194,9 @@ module SimCtl
     #
     # @return [SimCtl::Runtime, String]
     def runtime
-      begin
-        @runtime ||= SimCtl.runtime(identifier: plist.runtime)
-      rescue
-        plist.runtime
-      end
+      @runtime ||= SimCtl.runtime(identifier: plist.runtime)
+    rescue
+      plist.runtime
     end
 
     # Saves a screenshot to a file
