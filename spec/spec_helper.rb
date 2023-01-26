@@ -9,12 +9,7 @@ Coveralls.wear!
 $LOAD_PATH.push File.expand_path('../../lib', __FILE__)
 require File.dirname(__FILE__) + '/../lib/simctl.rb'
 
-SimCtl.default_timeout = if ENV['TRAVIS']
-                           300
-                         else
-                           60
-                         end
-
+SimCtl.default_timeout = 300
 SimCtl.device_set_path = Dir.mktmpdir 'foo bar' if ENV['CUSTOM_DEVICE_SET_PATH']
 
 RSpec.configure do |config|
