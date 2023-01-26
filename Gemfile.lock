@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simctl (1.6.9)
+    simctl (1.6.10)
       CFPropertyList
       naturally
 
@@ -69,6 +69,7 @@ GEM
     unicode-display_width (1.8.0)
 
 PLATFORMS
+  arm64-darwin-21
   arm64-darwin-22
 
 DEPENDENCIES
