@@ -69,7 +69,7 @@ RSpec.describe SimCtl do
 
   describe '#runtime' do
     it 'find runtime by name' do
-      expect(SimCtl.runtime(name: 'iOS 14.5')).to be_kind_of SimCtl::Runtime
+      expect(SimCtl.runtime(name: 'iOS 15.2')).to be_kind_of SimCtl::Runtime
     end
 
     it 'raise exception if runtime is not found' do
@@ -77,6 +77,8 @@ RSpec.describe SimCtl do
     end
 
     it 'finds the latest runtime' do
+      if SimCtl::Xcode::Version.gte?('13.2')
+        expect(SimCtl::Runtime.latest(:ios).version).to be == '15.2'
       if SimCtl::Xcode::Version.gte?('12.5')
         expect(SimCtl::Runtime.latest(:ios).version).to be == '14.5'
       elsif SimCtl::Xcode::Version.gte?('11.4')
