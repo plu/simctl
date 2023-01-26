@@ -10,15 +10,16 @@ module SimCtl
     def where(filter)
       return self if filter.nil?
       select do |item|
+        matches = true
         filter.each do |key, value|
-          return false unless case value
-                              when Regexp
-                                item.send(key) =~ value
-                              else
-                                item.send(key) == value
-                              end
+          matches &= case value
+                     when Regexp
+                       item.send(key) =~ value
+                     else
+                       item.send(key) == value
+                     end
         end
-        true
+        matches
       end
     end
   end
