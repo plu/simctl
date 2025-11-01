@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'CFPropertyList'
   s.add_dependency 'naturally'
+  s.add_dependency 'ostruct'
 end
